@@ -35,7 +35,7 @@ export default function PlanCarousel({ plans }) {
 
   return (
     <div className="relative" {...carouselAria} onKeyDown={handleKeyDown}>
-      <div className="grid" aria-live={hasMultiple ? "polite" : undefined}>
+      <div className="grid">
         {plans.map((plan, index) => {
           const isCurrent = index === current;
           const slideAria = hasMultiple
@@ -51,8 +51,10 @@ export default function PlanCarousel({ plans }) {
               key={plan.id}
               {...slideAria}
               aria-hidden={!isCurrent}
-              className={`col-start-1 row-start-1 transition-opacity duration-300 motion-reduce:transition-none ${
-                isCurrent ? "opacity-100" : "pointer-events-none opacity-0"
+              className={`col-start-1 row-start-1 transition-opacity motion-reduce:transition-none ${
+                isCurrent
+                  ? "opacity-100 duration-200 delay-150"
+                  : "pointer-events-none opacity-0 duration-150"
               }`}
             >
               <PlanCard plan={plan} />
@@ -60,6 +62,12 @@ export default function PlanCarousel({ plans }) {
           );
         })}
       </div>
+
+      {hasMultiple && (
+        <span className="sr-only" aria-live="polite">
+          {`Plano ${current + 1} de ${plans.length}: ${plans[current].title}`}
+        </span>
+      )}
 
       {hasMultiple && (
         <>
