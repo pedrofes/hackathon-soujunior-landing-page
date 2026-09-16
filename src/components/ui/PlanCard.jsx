@@ -1,16 +1,16 @@
 export default function PlanCard({ plan }) {
   return (
-    <article className="rounded-3xl border border-white/25 bg-white/10 p-6 shadow-xl backdrop-blur-md lg:p-8">
-      <p className="font-display text-3xl font-bold text-white lg:text-4xl">
+    <article className="rounded-[2rem] border border-white/25 bg-white/5 p-8 shadow-xl backdrop-blur-md lg:p-10">
+      <p className="font-display text-3xl font-medium text-white lg:text-4xl">
         {plan.price}
-        <span className="font-sans text-base font-normal text-white/70">
-          {plan.period}
-        </span>
+        <span>{plan.period}</span>
       </p>
-      <h3 className="mt-4 font-sans text-sm text-white/90 lg:text-base">
+      <h3 className="mt-6 font-display text-base font-medium text-white lg:text-lg">
         {plan.title}
       </h3>
-      <p className="mt-4 font-sans text-xs text-white/70">{plan.description}</p>
+      <p className="mt-6 font-sans text-sm font-light text-white">
+        {plan.description}
+      </p>
     </article>
   );
 }

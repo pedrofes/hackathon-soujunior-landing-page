@@ -4,9 +4,9 @@ import { PLANS } from "@/data/plans";
 
 export default function Plans() {
   return (
-    <section id="planos" className="w-full bg-accent px-6 py-16 lg:py-24">
+    <section className="w-full bg-linear-to-br from-plans-start to-plans-end px-6 py-16 lg:py-24" id="planos">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-center font-display text-3xl font-bold text-white lg:text-5xl">
+        <h2 className="text-center font-display text-3xl font-medium text-white lg:text-5xl">
           <span className="block">Apoie de forma</span>
           <span className="block">
             <span className="text-yellow-accent">simples</span> e{" "}
@@ -20,10 +20,10 @@ export default function Plans() {
           <div className="hidden w-px self-stretch bg-white/20 lg:block" />
 
           <div className="text-center lg:text-left">
-            <h3 className="font-display text-2xl font-bold text-white lg:text-4xl">
+            <h3 className="font-display text-2xl font-medium text-white lg:text-4xl">
               Faça parte dessa transformação.
             </h3>
-            <p className="mt-4 font-sans text-sm text-white/80">
+            <p className="mt-4 font-sans text-sm text-white">
               Apoie quem está construindo o futuro na tecnologia.
             </p>
             <CtaButton href="https://apoia.se/soujunior" className="mt-8">
