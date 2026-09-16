@@ -23,24 +23,42 @@ export default function PlanCarousel({ plans }) {
   };
 
   const arrowClasses =
-    "absolute top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-2xl leading-none text-white/70 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white";
+    "absolute top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-2xl leading-none text-white/70 transition-colors hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+
+  const carouselAria = hasMultiple
+    ? {
+        role: "group",
+        "aria-roledescription": "carrossel",
+        "aria-label": "Planos de apoio",
+      }
+    : {};
 
   return (
-    <div
-      className="relative"
-      role="group"
-      aria-roledescription="carrossel"
-      aria-label="Planos de apoio"
-      onKeyDown={handleKeyDown}
-    >
-      <div aria-live="polite">
-        <div
-          role="group"
-          aria-roledescription="slide"
-          aria-label={`Plano ${current + 1} de ${plans.length}`}
-        >
-          <PlanCard plan={plans[current]} />
-        </div>
+    <div className="relative" {...carouselAria} onKeyDown={handleKeyDown}>
+      <div className="grid" aria-live={hasMultiple ? "polite" : undefined}>
+        {plans.map((plan, index) => {
+          const isCurrent = index === current;
+          const slideAria = hasMultiple
+            ? {
+                role: "group",
+                "aria-roledescription": "slide",
+                "aria-label": `Plano ${index + 1} de ${plans.length}`,
+              }
+            : {};
+
+          return (
+            <div
+              key={plan.id}
+              {...slideAria}
+              aria-hidden={!isCurrent}
+              className={`col-start-1 row-start-1 transition-opacity duration-300 motion-reduce:transition-none ${
+                isCurrent ? "opacity-100" : "pointer-events-none opacity-0"
+              }`}
+            >
+              <PlanCard plan={plan} />
+            </div>
+          );
+        })}
       </div>
 
       {hasMultiple && (
@@ -49,7 +67,7 @@ export default function PlanCarousel({ plans }) {
             type="button"
             onClick={goPrev}
             aria-label="Plano anterior"
-            className={`${arrowClasses} -left-3 lg:-left-10`}
+            className={`${arrowClasses} -left-3 xl:-left-10`}
           >
             <span aria-hidden="true">&lsaquo;</span>
           </button>
@@ -58,7 +76,7 @@ export default function PlanCarousel({ plans }) {
             type="button"
             onClick={goNext}
             aria-label="Próximo plano"
-            className={`${arrowClasses} -right-3 lg:-right-10`}
+            className={`${arrowClasses} -right-3 xl:-right-10`}
           >
             <span aria-hidden="true">&rsaquo;</span>
           </button>
@@ -71,8 +89,8 @@ export default function PlanCarousel({ plans }) {
                   onClick={() => goTo(index)}
                   aria-label={`Ir para o plano ${index + 1}`}
                   aria-current={index === current}
-                  className={`h-2 rounded-full transition-all motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                    index === current ? "w-4 bg-white" : "w-2 bg-white/40"
+                  className={`h-2 rounded-full transition-all motion-reduce:transition-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                    index === current ? "w-4 bg-white" : "w-2 bg-white/50"
                   }`}
                 />
               </li>
