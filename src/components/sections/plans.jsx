@@ -1,5 +1,5 @@
 import CtaButton from "@/components/ui/CtaButton";
-import PlanCard from "@/components/ui/PlanCard";
+import PlanCarousel from "@/components/ui/PlanCarousel";
 import { PLANS } from "@/data/plans";
 
 export default function Plans() {
@@ -15,7 +15,7 @@ export default function Plans() {
         </h2>
 
         <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
-          <PlanCard plan={PLANS[0]} />
+          <PlanCarousel plans={PLANS} />
 
           <div className="hidden w-px self-stretch bg-white/20 lg:block" />
 
