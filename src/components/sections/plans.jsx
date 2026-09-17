@@ -1,53 +1,35 @@
+import CtaButton from "@/components/ui/CtaButton";
+import PlanCarousel from "@/components/ui/PlanCarousel";
+import { PLANS } from "@/data/plans";
+
 export default function Plans() {
   return (
-    <section id="planos" className="w-full py-16 px-6 bg-base-white border-b border-neutral/10">
-      <div className="max-w-4xl mx-auto text-center">
-        <span className="text-xs uppercase font-bold text-primary tracking-wider">
-          [Planos]
-        </span>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-secondary mt-2 mb-4">
-          Escolha uma forma de apoio
+    <section className="w-full bg-linear-to-br from-plans-start to-plans-end px-6 py-16 lg:py-24" id="planos">
+      <div className="mx-auto max-w-5xl">
+        <h2 className="text-center font-display text-3xl font-medium text-white lg:text-5xl">
+          <span className="block">Apoie de forma</span>
+          <span className="block">
+            <span className="text-yellow-accent">simples</span> e{" "}
+            <span className="text-yellow-accent">acessível</span>
+          </span>
         </h2>
-        <p className="font-sans text-neutral max-w-xl mx-auto mb-10">
-          Doações recorrentes a partir de R$ 2 no Apoia.se.
-        </p>
 
-        {/* Cards de Apoio */}
-        <div className="max-w-md mx-auto p-8 bg-white rounded-2xl border border-primary/20 shadow-md flex flex-col items-center">
-          <h3 className="font-display text-2xl font-bold text-secondary">Apoiador SouJunior</h3>
-          <div className="my-4">
-            <span className="font-display text-4xl font-extrabold text-primary">R$ 2</span>
-            <span className="font-sans text-neutral/70"> / mês</span>
+        <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-12">
+          <PlanCarousel plans={PLANS} />
+
+          <div className="hidden w-px self-stretch bg-white/20 lg:block" />
+
+          <div className="text-center lg:text-left">
+            <h3 className="font-display text-2xl font-medium text-white lg:text-4xl">
+              Faça parte dessa transformação.
+            </h3>
+            <p className="mt-4 font-sans text-sm text-white">
+              Apoie quem está construindo o futuro na tecnologia.
+            </p>
+            <CtaButton href="https://apoia.se/soujunior" className="mt-8">
+              Apoie a SouJunior
+            </CtaButton>
           </div>
-          <p className="font-sans text-xs text-neutral/80 mb-6">
-            Contribua para a comunidade
-          </p>
-          <a
-            href="https://apoia.se/soujunior"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-yellow-accent hover:bg-yellow-500 text-neutral font-bold py-3 px-6 rounded-xl transition-all text-center shadow-sm"
-          >
-            Quero Apoiar
-          </a>
-        </div>
-        <div className="max-w-md mx-auto p-8 bg-white rounded-2xl border border-primary/20 shadow-md flex flex-col items-center">
-          <h3 className="font-display text-2xl font-bold text-secondary">Apoiador SouJunior</h3>
-          <div className="my-4">
-            <span className="font-display text-4xl font-extrabold text-primary">R$ 5</span>
-            <span className="font-sans text-neutral/70"> / mês</span>
-          </div>
-          <p className="font-sans text-xs text-neutral/80 mb-6">
-            Contribua para a comunidade
-          </p>
-          <a
-            href="https://apoia.se/soujunior"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-yellow-accent hover:bg-yellow-500 text-neutral font-bold py-3 px-6 rounded-xl transition-all text-center shadow-sm"
-          >
-            Quero Apoiar
-          </a>
         </div>
       </div>
     </section>
