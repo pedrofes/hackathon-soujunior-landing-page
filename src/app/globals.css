@@ -11,7 +11,12 @@
   --color-cyan: #22D3EE;
   --color-yellow-accent: #FACC15;
 
+  /* Gradiente da seção de Planos, amostrado do Figma (node 137:1458) */
+  --color-plans-start: #474BE0;
+  --color-plans-end: #595DEC;
+
   /* Fontes com base no Figma */
   --font-display: var(--font-funnel-display), sans-serif;
   --font-sans: var(--font-funnel-sans), sans-serif;
+  --font-radio: var(--font-radio-canada), sans-serif;
 }
