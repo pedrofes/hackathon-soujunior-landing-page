@@ -7,7 +7,7 @@ export default function Hero() {
     const [isPressed, setIsPressed] = useState(false);
 
     return (
-        <section id="hero" className="w-full min-h-[calc(100vh-81px)] flex items-center px-6 border-b border-neutral/10 bg-[#0E14BF]">
+        <section id="hero" className="w-full min-h-[calc(100vh+100px)] -mt-[100px] pt-[100px] flex items-center px-6 border-b border-neutral/10 bg-[#0E14BF]">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
                     <div className="text-left">
                         <div className="text-left">
