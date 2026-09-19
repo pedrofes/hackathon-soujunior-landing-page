@@ -67,7 +67,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-accent to-purple pt-6 px-6">
+    <header className="sticky top-0 z-50 pt-6 px-6">
       <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
 
         <div>
