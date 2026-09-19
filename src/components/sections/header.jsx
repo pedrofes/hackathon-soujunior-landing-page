@@ -80,6 +80,19 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex gap-[30.72px] font-radio text-[19.201px] font-medium text-[#F0E9FD]">
+           <a
+            href="#depoimentos"
+            className="relative group"
+            onClick={() => handleNavClick("depoimentos")}
+          >
+            Depoimentos
+            <span
+              className={`absolute left-1/2 top-full mt-1 h-[4px] w-[51px] -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${
+                activeSection === "depoimentos" ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          </a>
+          
           <a
             href="#causa"
             className="relative group"
