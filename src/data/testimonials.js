@@ -2,7 +2,7 @@
 export const TESTIMONIALS = [
   {
     id: "marina-silva",
-    image: "/images/marina-silva.jpg",
+    image: "/images/marina-silva.png",
     quote:
       "A **SouJunior** foi um divisor de águas na minha trajetória. Hoje estou na minha primeira oportunidade na área de Produto.",
     name: "Marina Silva",
@@ -11,7 +11,7 @@ export const TESTIMONIALS = [
   },
   {
     id: "lucas-ferreira",
-    image: "/images/lucas-ferreira.jpg",
+    image: "/images/lucas-ferreira.png",
     quote:
       "Eu estudava desenvolvimento, mas sentia falta de colocar o conhecimento em prática. Na **SouJunior**, pude colaborar em projetos com outras pessoas da área.",
     name: "Lucas Ferreira",
@@ -20,7 +20,7 @@ export const TESTIMONIALS = [
   },
   {
     id: "ana-beatriz",
-    image: "/images/ana-beatriz.jpg",
+    image: "/images/ana-beatriz.png",
     quote:
       "As **trocas e mentorias** me ajudaram a enxergar com mais clareza o que eu precisava desenvolver e quais seriam meus próximos passos. Ter pessoas compartilhando esse caminho **fez muita diferença**.",
     name: "Ana Beatriz",
@@ -29,7 +29,7 @@ export const TESTIMONIALS = [
   },
   {
     id: "gabriel-santos",
-    image: "/images/gabriel-santos.jpg",
+    image: "/images/gabriel-santos.png",
     quote:
       "O que mais me marcou na SouJunior foi perceber que não precisava construir minha carreira sozinho.",
     name: "Gabriel Santos",
