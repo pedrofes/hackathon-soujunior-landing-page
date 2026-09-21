@@ -84,50 +84,52 @@ export default function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="flex w-full min-h-screen flex-col justify-center overflow-hidden bg-[#0E14BF] px-6 py-20 lg:py-28"
+      className="flex w-full min-h-screen flex-col overflow-hidden bg-[#0E14BF] px-6 py-16 lg:py-20"
     >
-      <h2 className="text-center font-display text-3xl font-extrabold text-white lg:text-4xl">
+      <h2 className="-translate-y-6 text-center font-display text-[36px] font-bold text-white lg:-translate-y-8">
         Depoimentos
       </h2>
 
-      <div
-        ref={containerRef}
-        onMouseEnter={() => (isPausedRef.current = true)}
-        onMouseLeave={() => (isPausedRef.current = false)}
-        className="mt-20 flex snap-x snap-mandatory gap-6 overflow-x-auto px-[max(1.5rem,calc(50%-170px))] pb-2 sm:px-[max(1.5rem,calc(50%-220px))] lg:mt-24 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-        }}
-      >
-        {TESTIMONIALS.map((testimonial, index) => (
-          <div
-            key={testimonial.id}
-            ref={(el) => {
-              cardRefs.current[index] = el;
-            }}
-            className="shrink-0 snap-center"
-          >
-            <TestimonialCard testimonial={testimonial} />
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-1 flex-col justify-center">
+        <div
+          ref={containerRef}
+          onMouseEnter={() => (isPausedRef.current = true)}
+          onMouseLeave={() => (isPausedRef.current = false)}
+          className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-[max(1.5rem,calc(50%-170px))] pb-2 sm:px-[max(1.5rem,calc(50%-220px))] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+          }}
+        >
+          {TESTIMONIALS.map((testimonial, index) => (
+            <div
+              key={testimonial.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              className="shrink-0 snap-center"
+            >
+              <TestimonialCard testimonial={testimonial} />
+            </div>
+          ))}
+        </div>
 
-      <div className="mt-6 flex justify-center gap-2" role="tablist" aria-label="Depoimentos">
-        {TESTIMONIALS.map((testimonial, index) => (
-          <button
-            key={testimonial.id}
-            type="button"
-            onClick={() => goTo(index)}
-            aria-label={`Ir para o depoimento de ${testimonial.name}`}
-            aria-current={index === activeIndex}
-            className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-              index === activeIndex ? "w-4 bg-white" : "w-2 bg-white/50"
-            }`}
-          />
-        ))}
+        <div className="mt-6 flex justify-center gap-2" role="tablist" aria-label="Depoimentos">
+          {TESTIMONIALS.map((testimonial, index) => (
+            <button
+              key={testimonial.id}
+              type="button"
+              onClick={() => goTo(index)}
+              aria-label={`Ir para o depoimento de ${testimonial.name}`}
+              aria-current={index === activeIndex}
+              className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
+                index === activeIndex ? "w-4 bg-white" : "w-2 bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
