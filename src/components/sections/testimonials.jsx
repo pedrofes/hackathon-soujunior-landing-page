@@ -15,11 +15,19 @@ export default function Testimonials() {
 
   const goTo = (index) => {
     indexRef.current = index;
-    cardRefs.current[index]?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+
+    const container = containerRef.current;
+    const card = cardRefs.current[index];
+    if (!container || !card) return;
+
+    // Rola apenas o eixo horizontal do carrossel: scrollIntoView também
+    // rola a página inteira quando o card está fora da viewport vertical.
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const cardOffsetLeft = cardRect.left - containerRect.left + container.scrollLeft;
+    const targetScrollLeft = cardOffsetLeft - (container.clientWidth - card.clientWidth) / 2;
+
+    container.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
   };
 
   // Autoplay: avança para o próximo depoimento a cada 3s.

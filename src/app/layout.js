@@ -28,7 +28,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className={`${funnelDisplay.variable} ${funnelSans.variable} ${radioCanada.variable}`}>
+    <html lang="pt-BR" className={`${funnelDisplay.variable} ${funnelSans.variable} ${radioCanada.variable}`} suppressHydrationWarning>
       <body className="font-sans bg-base-white text-neutral antialiased">
         {children}
       </body>
