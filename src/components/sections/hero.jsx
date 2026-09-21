@@ -1,11 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
 
 export default function Hero() {
-    const [isPressed, setIsPressed] = useState(false);
-
     return (
         <section id="hero" className="w-full min-h-[calc(100vh+100px)] -mt-[100px] pt-[100px] flex items-center px-6 border-b border-neutral/10 bg-[#0E14BF]">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
@@ -16,18 +11,18 @@ export default function Hero() {
                             hoje pode <span className="text-yellow-accent">transformar</span> <br />
                             a tecnologia amanhã.
                         </h1>
-                        <h3 className="font-sans text-[#E7E8EA] max-w-xl mb-6 text-left">
+                        <h3 className="font-sans text-[#E7E8EA] max-w-xl mb-6 text-left text-[24px]">
                             Apoie profissionais juniores e ajude a fortalecer uma<br />
                             comunidade que transforma início de carreira em<br /> oportunidade.
                         </h3>
                     </div>
                     <div className="text-left mt-8">
-                        <button
-                            onClick={() => setIsPressed(true)}
-                            className={`bg-[#0A1662] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#171123E5] active:bg-[#3C7EF9] transition-transform duration-200 hover:scale-105 ${isPressed ? "scale-105" : ""}`}
+                        <a
+                            href="#planos"
+                            className="bg-[#171123] w-[306px] h-[72px] flex items-center justify-center text-[24px] text-white font-bold py-3 px-6 rounded-2xl hover:bg-[#171123E5] active:bg-[#3C7EF9] transition-transform duration-200 hover:scale-105"
                         >
                             Apoie a SouJunior
-                        </button>
+                        </a>
                         <p className="text-[#E7E8EA] mt-4">
                             Apoie a partir de R$2/mês.
                         </p>
