@@ -6,7 +6,7 @@ export default function Cause() {
     <section
       id="causa"
       aria-labelledby="causa-title"
-      className="w-full py-20 px-4 sm:px-6 bg-secondary text-base-white border-b border-white/10"
+      className="w-full py-20 px-4 sm:px-6 bg-[#0E14BF] text-base-white"
     >
       <div className="max-w-7xl mx-auto text-center">
         <h2
