@@ -59,7 +59,7 @@ export default function Impact() {
       className="w-full bg-linear-to-b from-accent to-purple px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
     >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-2xl font-bold text-white lg:text-4xl">
+        <h2 className="font-display text-[28px] font-bold text-white">
           O seu apoio nos ajuda
           <br />a <span className="text-yellow-accent">impactar</span> cada vez mais
         </h2>
@@ -89,7 +89,7 @@ export default function Impact() {
           >
             <div className="mt-2 flex items-end justify-between">
               <div>
-                <p className="font-display text-xl font-extrabold text-neutral lg:text-2xl">114</p>
+                <p className="font-sans text-xl font-extrabold text-neutral lg:text-2xl">114</p>
                 <p className="font-sans text-[10px] text-neutral/60">apoiadores</p>
               </div>
               <AvatarStack avatars={SUPPORTER_AVATARS} altPrefix="Apoiador" />
@@ -106,12 +106,13 @@ export default function Impact() {
             }
             label="Meta/ Mês"
           >
-            <div className="mt-3">
+            <div className="mt-3 rounded-md border border-neutral/10 p-2">
               <p className="text-right font-sans text-xs font-bold text-neutral">R$ 1000</p>
-              <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-secondary/10">
-                <div className="h-full w-[73%] rounded-full bg-primary" />
+              <div className="mt-2 h-5 w-full overflow-hidden rounded-sm bg-secondary/10">
+                <div className="flex h-full w-[73%] items-center rounded-sm bg-primary pl-2">
+                  <span className="font-sans text-[10px] font-semibold text-white">73%</span>
+                </div>
               </div>
-              <p className="mt-1 font-sans text-[10px] text-neutral/60">73%</p>
             </div>
           </StatCard>
 
@@ -127,7 +128,7 @@ export default function Impact() {
           >
             <div className="mt-2 flex items-end justify-between">
               <div>
-                <p className="font-display text-xl font-extrabold text-neutral lg:text-2xl">+50</p>
+                <p className="font-sans text-xl font-extrabold text-neutral lg:text-2xl">+50</p>
                 <p className="font-sans text-[10px] text-neutral/60">Pessoas empregadas</p>
               </div>
               <AvatarStack avatars={EMPLOYED_AVATARS} altPrefix="Pessoa empregada" />
@@ -145,7 +146,7 @@ export default function Impact() {
             label={null}
           >
             <div>
-              <p className="font-display text-lg font-extrabold text-neutral">35</p>
+              <p className="font-sans text-lg font-extrabold text-neutral">35</p>
               <p className="font-sans text-[10px] text-neutral/60">Mentores ativos</p>
             </div>
           </StatCard>
@@ -165,7 +166,7 @@ export default function Impact() {
             </div>
             <div className="mt-3 flex items-end justify-between">
               <div>
-                <p className="font-display text-3xl font-extrabold text-neutral">114</p>
+                <p className="font-sans text-3xl font-extrabold text-neutral">114</p>
                 <p className="font-sans text-xs text-neutral/60">apoiadores</p>
               </div>
               <AvatarStack avatars={SUPPORTER_AVATARS} altPrefix="Apoiador" />
@@ -182,12 +183,13 @@ export default function Impact() {
               </IconBadge>
               <p className="font-sans text-sm font-semibold text-secondary">Meta/ Mês</p>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 rounded-md border border-neutral/10 p-3">
               <p className="text-right font-sans text-sm font-bold text-neutral">R$ 1000</p>
-              <div className="mt-1 h-2 w-full overflow-hidden rounded-full bg-secondary/10">
-                <div className="h-full w-[73%] rounded-full bg-primary" />
+              <div className="mt-2 h-6 w-full overflow-hidden rounded-sm bg-secondary/10">
+                <div className="flex h-full w-[73%] items-center rounded-sm bg-primary pl-3">
+                  <span className="font-sans text-xs font-semibold text-white">73%</span>
+                </div>
               </div>
-              <p className="mt-1 font-sans text-xs text-neutral/60">73%</p>
             </div>
           </div>
 
@@ -205,7 +207,7 @@ export default function Impact() {
             </div>
             <div className="mt-3 flex items-end justify-between">
               <div>
-                <p className="font-display text-3xl font-extrabold text-neutral">+50</p>
+                <p className="font-sans text-3xl font-extrabold text-neutral">+50</p>
                 <p className="font-sans text-xs text-neutral/60">Pessoas empregadas</p>
               </div>
               <AvatarStack avatars={EMPLOYED_AVATARS} altPrefix="Pessoa empregada" />
@@ -220,7 +222,7 @@ export default function Impact() {
               </svg>
             </IconBadge>
             <div>
-              <p className="font-display text-2xl font-extrabold text-neutral">35</p>
+              <p className="font-sans text-2xl font-extrabold text-neutral">35</p>
               <p className="font-sans text-xs text-neutral/60">Mentores ativos</p>
             </div>
           </div>
@@ -228,7 +230,12 @@ export default function Impact() {
 
         <div className="mt-8 text-right font-sans text-sm text-white/90">
           <p>Veja para onde vai o seu apoio →</p>
-          <a href="#" className="underline decoration-white/60 underline-offset-2 hover:text-white">
+          <a
+            href="https://hackathon.soujunior.tech/gastos_2026.csv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-white/60 underline-offset-2 hover:text-white"
+          >
             Baixe a planilha de gastos de 2026 (CSV).
           </a>
         </div>
