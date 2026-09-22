@@ -59,15 +59,15 @@ export default function Impact() {
       className="w-full bg-linear-to-b from-accent to-purple px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
     >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-[28px] font-bold text-white">
+        <h2 className="font-display text-3xl lg:text-4xl font-bold text-white">
           O seu apoio nos ajuda
           <br />a <span className="text-yellow-accent">impactar</span> cada vez mais
         </h2>
 
         {/* Diagrama de impacto — visível a partir de md, com posicionamento absoluto fiel ao design */}
-        <div className="relative mx-auto mt-10 hidden h-[400px] max-w-xl items-center justify-center md:flex">
-          <div className="absolute h-[320px] w-[320px] rounded-full border border-white/15" />
-          <div className="absolute h-[220px] w-[220px] rounded-full border border-white/15" />
+        <div className="relative mx-auto mt-10 hidden h-96 max-w-xl items-center justify-center md:flex">
+          <div className="absolute h-80 w-80 rounded-full border border-white/15" />
+          <div className="absolute h-56 w-56 rounded-full border border-white/15" />
 
           <Image
             src="/impact.png"
@@ -90,7 +90,7 @@ export default function Impact() {
             <div className="mt-2 flex items-end justify-between">
               <div>
                 <p className="font-sans text-xl font-extrabold text-neutral lg:text-2xl">114</p>
-                <p className="font-sans text-[10px] text-neutral/60">apoiadores</p>
+                <p className="font-sans text-xs text-neutral/60">apoiadores</p>
               </div>
               <AvatarStack avatars={SUPPORTER_AVATARS} altPrefix="Apoiador" />
             </div>
@@ -110,7 +110,7 @@ export default function Impact() {
               <p className="text-right font-sans text-xs font-bold text-neutral">R$ 1000</p>
               <div className="mt-2 h-5 w-full overflow-hidden rounded-sm bg-secondary/10">
                 <div className="flex h-full w-[73%] items-center rounded-sm bg-primary pl-2">
-                  <span className="font-sans text-[10px] font-semibold text-white">73%</span>
+                  <span className="font-sans text-xs font-semibold text-white">73%</span>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function Impact() {
             <div className="mt-2 flex items-end justify-between">
               <div>
                 <p className="font-sans text-xl font-extrabold text-neutral lg:text-2xl">+50</p>
-                <p className="font-sans text-[10px] text-neutral/60">Pessoas empregadas</p>
+                <p className="font-sans text-xs text-neutral/60">Pessoas empregadas</p>
               </div>
               <AvatarStack avatars={EMPLOYED_AVATARS} altPrefix="Pessoa empregada" />
             </div>
@@ -147,7 +147,7 @@ export default function Impact() {
           >
             <div>
               <p className="font-sans text-lg font-extrabold text-neutral">35</p>
-              <p className="font-sans text-[10px] text-neutral/60">Mentores ativos</p>
+              <p className="font-sans text-xs text-neutral/60">Mentores ativos</p>
             </div>
           </StatCard>
         </div>

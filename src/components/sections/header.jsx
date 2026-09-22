@@ -68,8 +68,8 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0E14BF] pt-6 px-6 min-[1000px]:bg-transparent">
-      <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
+    <header className="sticky top-0 z-50 bg-accent pt-6 px-6 min-[1000px]:bg-transparent">
+      <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-14 w-full max-w-6xl mx-auto">
 
         <div>
           <Image
@@ -80,7 +80,7 @@ export default function Header() {
           />
         </div>
 
-        <div className="hidden min-[1000px]:flex gap-[30.72px] font-radio text-[19.201px] font-medium text-[#F0E9FD]">
+        <div className="hidden min-[1000px]:flex gap-8 font-radio text-base font-medium text-lavender">
           <a
             href="#depoimentos"
             className="relative group"
@@ -88,12 +88,11 @@ export default function Header() {
           >
             Depoimentos
             <span
-              className={`absolute left-1/2 top-full mt-1 h-[4px] w-[51px] -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${
-                activeSection === "depoimentos" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "depoimentos" ? "opacity-100" : "opacity-0"
+                }`}
             />
           </a>
-          
+
           <a
             href="#causa"
             className="relative group"
@@ -101,9 +100,8 @@ export default function Header() {
           >
             Por que apoiar?
             <span
-              className={`absolute left-1/2 top-full mt-1 h-[4px] w-[51px] -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${
-                activeSection === "causa" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "causa" ? "opacity-100" : "opacity-0"
+                }`}
             />
           </a>
 
@@ -114,9 +112,8 @@ export default function Header() {
           >
             Impacto
             <span
-              className={`absolute left-1/2 top-full mt-1 h-[4px] w-[51px] -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${
-                activeSection === "impacto" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "impacto" ? "opacity-100" : "opacity-0"
+                }`}
             />
           </a>
 
@@ -127,9 +124,8 @@ export default function Header() {
           >
             Planos
             <span
-              className={`absolute left-1/2 top-full mt-1 h-[4px] w-[51px] -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${
-                activeSection === "planos" ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "planos" ? "opacity-100" : "opacity-0"
+                }`}
             />
           </a>
         </div>
@@ -138,7 +134,7 @@ export default function Header() {
           href="https://apoia.se/soujunior"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden min-[1000px]:flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent text-[15.361px] font-bold text-[#1D1B1B] active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
+          className="hidden min-[1000px]:flex items-center justify-center rounded-xl border border-yellow-accent bg-yellow-accent px-5 py-2 text-sm font-bold text-dark-text active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
         >
           Quero apoiar
         </a>
@@ -159,7 +155,7 @@ export default function Header() {
       {menuOpen && (
         <div
           id="mobile-menu"
-         className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-[#0E14BF] px-6 py-5 font-radio text-[#F0E9FD] min-[1000px]:hidden"
+          className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-accent px-6 py-5 font-radio text-lavender min-[1000px]:hidden"
         >
           <a
             href="#depoimentos"
@@ -194,7 +190,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
-            className="flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent font-sans text-[15.361px] font-bold text-[#1D1B1B] transition-transform duration-200 hover:scale-105 active:bg-primary active:text-white"
+            className="flex items-center justify-center rounded-xl border border-yellow-accent bg-yellow-accent px-5 py-2 font-sans text-sm font-bold text-dark-text transition-transform duration-200 hover:scale-105 active:bg-primary active:text-white"
           >
             Quero apoiar
           </a>
