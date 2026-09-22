@@ -86,7 +86,7 @@ export default function Testimonials() {
       id="depoimentos"
       className="flex w-full min-h-screen flex-col overflow-hidden bg-accent px-6 py-16 lg:py-20"
     >
-      <h2 className="-translate-y-6 text-center font-display text-[36px] font-bold text-white lg:-translate-y-8">
+      <h2 className="-translate-y-6 text-center font-display text-4xl font-bold text-white lg:-translate-y-8">
         Depoimentos
       </h2>
 
@@ -116,7 +116,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-6 flex justify-center gap-2" role="tablist" aria-label="Depoimentos">
+        <div className="mt-6 flex justify-center gap-2" aria-label="Depoimentos">
           {TESTIMONIALS.map((testimonial, index) => (
             <button
               key={testimonial.id}
@@ -124,9 +124,8 @@ export default function Testimonials() {
               onClick={() => goTo(index)}
               aria-label={`Ir para o depoimento de ${testimonial.name}`}
               aria-current={index === activeIndex}
-              className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                index === activeIndex ? "w-4 bg-white" : "w-2 bg-white/50"
-              }`}
+              className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${index === activeIndex ? "w-4 bg-white" : "w-2 bg-white/50"
+                }`}
             />
           ))}
         </div>

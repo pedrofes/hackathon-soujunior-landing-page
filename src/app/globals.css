@@ -7,13 +7,19 @@ html {
 }
 
 @theme {
-  /* Cores com base no Figma */
+  /* Cores com base no Figma / Design System*/
   --color-primary: #3C7EF9;
   --color-secondary: #0A1662;
   --color-accent: #0E14BF;
   --color-neutral: #242731;
   --color-base-white: #E7E8EA;
   --color-yellow-accent: #FACC15;
+
+  /* Cores do Design System para Botões e Cabeçalho (Issue #18) */
+  --color-dark-surface: #171123;
+  --color-dark-hover: #2A2140;
+  --color-lavender: #F0E9FD;
+  --color-dark-text: #1D1B1B;
 
   /* Gradiente da seção de Planos, amostrado do Figma (node 137:1458) */
   --color-plans-start: #474BE0;

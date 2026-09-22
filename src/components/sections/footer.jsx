@@ -4,19 +4,19 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="flex h-auto min-h-[380px] w-full flex-col items-start justify-center gap-[70px] px-6 py-12 md:px-12 lg:h-[380px] lg:px-[120px] lg:py-0"
+      className="flex h-auto min-h-96 w-full flex-col items-start justify-center gap-16 bg-linear-to-br from-plans-start to-plans-end px-6 py-12 md:px-12 lg:px-28"
     >
       {/* Parte superior do Footer */}
       <div className="flex w-full flex-col items-center gap-8 md:flex-row md:justify-between">
-        
+
         {/* Logo SouJunior + slogan */}
-        <div className="flex flex-col items-center gap-8 md:w-[381px] md:items-start">
+        <div className="flex flex-col items-center gap-8 md:max-w-sm md:items-start">
           <Image
             src="/images/logo-soujunior-footer.svg"
             alt="SouJunior"
             width={361}
             height={57}
-            className="h-auto w-[200px] md:h-[57px] md:w-[361.29px]"
+            className="h-auto w-48 md:w-80"
           />
 
           {/* Selo Sem Fronteiras - apenas mobile */}
@@ -25,10 +25,10 @@ export default function Footer() {
             alt="Selo Sem Fronteiras"
             width={149}
             height={156}
-            className="h-auto w-[110px] md:hidden"
+            className="h-auto w-28 md:hidden"
           />
 
-          <p className="text-center font-sans text-[22px] font-light tracking-[0.012em] text-white md:text-left md:text-[27.56px]">
+          <p className="text-center font-sans text-xl font-light tracking-wide text-white md:text-left md:text-2xl">
             Mais do que um apoio,
             <br />
             é uma comunidade.
@@ -41,12 +41,12 @@ export default function Footer() {
           alt="Selo Sem Fronteiras"
           width={149}
           height={156}
-          className="hidden h-[156.16px] w-[148.83px] md:block"
+          className="hidden h-36 w-auto md:block"
         />
       </div>
 
       {/* Redes sociais */}
-      <div className="grid w-full grid-cols-2 place-items-center gap-x-8 gap-y-6 md:flex md:items-center md:justify-between lg:w-auto lg:justify-start lg:gap-[43.609px]">
+      <div className="grid w-full grid-cols-2 place-items-center gap-x-8 gap-y-6 md:flex md:items-center md:justify-between lg:w-auto lg:justify-start lg:gap-10">
         <a
           href="https://apoia.se/soujunior"
           target="_blank"
@@ -59,7 +59,7 @@ export default function Footer() {
             alt="Apoia.se"
             width={158}
             height={36}
-            className="h-auto w-[95px] shrink-0 md:w-[110px] lg:h-[36.2px] lg:w-[157.66px]"
+            className="h-auto w-24 shrink-0 md:w-28 lg:w-36"
           />
         </a>
 
@@ -75,7 +75,7 @@ export default function Footer() {
             alt="WhatsApp"
             width={162}
             height={37}
-            className="h-auto w-[98px] shrink-0 md:w-[113px] lg:h-[36.9px] lg:w-[161.86px]"
+            className="h-auto w-24 shrink-0 md:w-28 lg:w-36"
           />
         </a>
 
@@ -91,7 +91,7 @@ export default function Footer() {
             alt="Discord"
             width={191}
             height={37}
-            className="h-auto w-[115px] shrink-0 md:w-[133px] lg:h-[36.9px] lg:w-[190.8px]"
+            className="h-auto w-28 shrink-0 md:w-32 lg:w-44"
           />
         </a>
 
@@ -107,7 +107,7 @@ export default function Footer() {
             alt="GitHub"
             width={162}
             height={37}
-            className="h-auto w-[98px] shrink-0 md:w-[113px] lg:h-[36.9px] lg:w-[161.86px]"
+            className="h-auto w-24 shrink-0 md:w-28 lg:w-36"
           />
         </a>
       </div>

@@ -19,7 +19,7 @@ export default function TestimonialCard({ testimonial }) {
   const { image, quote, name, role, subtitle } = testimonial;
 
   return (
-    <article className="flex h-full w-[340px] shrink-0 snap-center gap-5 rounded-[2rem] bg-white p-6 shadow-xl sm:w-[440px]">
+    <article className="flex h-full w-80 sm:w-96 shrink-0 snap-center gap-5 rounded-3xl bg-white p-6 shadow-xl">
       <div className="relative shrink-0">
         <Image
           src="/images/ellipse-24.png"
@@ -38,7 +38,7 @@ export default function TestimonialCard({ testimonial }) {
           className="absolute -right-4 bottom-2"
         />
 
-        <div className="relative h-full min-h-[170px] w-28 overflow-hidden rounded-2xl bg-linear-to-br from-primary/25 to-secondary/25 sm:w-36">
+        <div className="relative h-full min-h-40 w-28 overflow-hidden rounded-2xl bg-linear-to-br from-primary/25 to-secondary/25 sm:w-36">
           <Image
             src={image}
             alt={`Foto de ${name}`}
