@@ -8,7 +8,7 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const sectionIds = ["hero", "causa", "impacto", "planos"];
+    const sectionIds = ["hero", "depoimentos", "causa", "impacto", "planos"];
 
     const updateActiveSection = () => {
       const footer = document.getElementById("footer");
@@ -40,6 +40,7 @@ export default function Header() {
       });
 
       if (
+        currentSection === "depoimentos" ||
         currentSection === "causa" ||
         currentSection === "impacto" ||
         currentSection === "planos"
@@ -67,7 +68,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 pt-6 px-6">
+    <header className="sticky top-0 z-50 bg-[#0E14BF] pt-6 px-6 min-[1000px]:bg-transparent">
       <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
 
         <div>
@@ -79,8 +80,8 @@ export default function Header() {
           />
         </div>
 
-        <div className="hidden md:flex gap-[30.72px] font-radio text-[19.201px] font-medium text-[#F0E9FD]">
-           <a
+        <div className="hidden min-[1000px]:flex gap-[30.72px] font-radio text-[19.201px] font-medium text-[#F0E9FD]">
+          <a
             href="#depoimentos"
             className="relative group"
             onClick={() => handleNavClick("depoimentos")}
@@ -137,7 +138,7 @@ export default function Header() {
           href="https://apoia.se/soujunior"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent text-[15.361px] font-bold text-[#1D1B1B] active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
+          className="hidden min-[1000px]:flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent text-[15.361px] font-bold text-[#1D1B1B] active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
         >
           Quero apoiar
         </a>
@@ -147,7 +148,7 @@ export default function Header() {
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/30 text-2xl text-white md:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/30 text-2xl text-white min-[1000px]:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? "✕" : "☰"}
@@ -158,8 +159,15 @@ export default function Header() {
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="mt-2 flex flex-col gap-4 rounded-2xl bg-white/6 px-6 py-5 font-radio text-[#F0E9FD] md:hidden"
+         className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-[#0E14BF] px-6 py-5 font-radio text-[#F0E9FD] min-[1000px]:hidden"
         >
+          <a
+            href="#depoimentos"
+            onClick={() => handleNavClick("depoimentos")}
+          >
+            Depoimentos
+          </a>
+
           <a
             href="#causa"
             onClick={() => handleNavClick("causa")}
