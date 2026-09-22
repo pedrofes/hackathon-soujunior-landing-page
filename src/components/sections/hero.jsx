@@ -2,9 +2,10 @@ import Image from "next/image";
 
 export default function Hero() {
     return (
-        <section id="hero" className="w-full min-h-[calc(100vh+100px)] -mt-[100px] pt-[100px] flex items-center px-6 bg-[#0E14BF]">
+        <section id="hero" className="w-full min-h-[calc(100vh+100px)] -mt-[100px] pt-[100px] flex items-center px-6 bg-accent">
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
                     <div className="text-left">
+                        <div className="text-left">
                         <h1 className="font-display text-[52px] md:max-[999px]:text-[38px] font-extrabold text-[#E7E8EA] mt-2 mb-4 text-left">
                             Quem está começando <br />
                             hoje pode <span className="text-yellow-accent">transformar</span> <br />

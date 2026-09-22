@@ -84,7 +84,7 @@ export default function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="flex w-full min-h-screen flex-col overflow-hidden bg-[#0E14BF] px-6 py-16 lg:py-20"
+      className="flex w-full min-h-screen flex-col overflow-hidden bg-accent px-6 py-16 lg:py-20"
     >
       <h2 className="-translate-y-6 text-center font-display text-[36px] font-bold text-white lg:-translate-y-8">
         Depoimentos

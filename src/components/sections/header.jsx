@@ -68,7 +68,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0E14BF] pt-6 px-6 min-[1000px]:bg-transparent">
+    <header className="sticky top-0 z-50 bg-accent pt-6 px-6 min-[1000px]:bg-transparent">
       <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
 
         <div>
@@ -159,7 +159,7 @@ export default function Header() {
       {menuOpen && (
         <div
           id="mobile-menu"
-         className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-[#0E14BF] px-6 py-5 font-radio text-[#F0E9FD] min-[1000px]:hidden"
+         className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-accent px-6 py-5 font-radio text-[#F0E9FD] min-[1000px]:hidden"
         >
           <a
             href="#depoimentos"
