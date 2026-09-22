@@ -69,7 +69,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-accent pt-6 px-6 min-[1000px]:bg-transparent">
-      <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-14 w-full max-w-6xl mx-auto">
+      <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
 
         <div>
           <Image
@@ -134,7 +134,7 @@ export default function Header() {
           href="https://apoia.se/soujunior"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden min-[1000px]:flex items-center justify-center rounded-xl border border-yellow-accent bg-yellow-accent px-5 py-2 text-sm font-bold text-dark-text active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
+          className="hidden min-[1000px]:flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent text-[15.361px] font-bold text-dark-text active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
         >
           Quero apoiar
         </a>
@@ -190,7 +190,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-center rounded-xl border border-yellow-accent bg-yellow-accent px-5 py-2 font-sans text-sm font-bold text-dark-text transition-transform duration-200 hover:scale-105 active:bg-primary active:text-white"
+            className="flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent font-sans text-[15.361px] font-bold text-dark-text transition-transform duration-200 hover:scale-105 active:bg-primary active:text-white"
           >
             Quero apoiar
           </a>

@@ -56,7 +56,7 @@ export default function Impact() {
   return (
     <section
       id="impacto"
-      className="w-full bg-linear-to-b from-accent to-purple px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
+      className="w-full px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
     >
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-display text-3xl lg:text-4xl font-bold text-white">

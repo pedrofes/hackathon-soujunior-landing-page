@@ -8,7 +8,7 @@ export default function Footer() {
     >
       {/* Parte superior do Footer */}
       <div className="flex w-full flex-col items-center gap-8 md:flex-row md:justify-between">
-        
+
         {/* Logo SouJunior + slogan */}
         <div className="flex flex-col items-center gap-8 md:max-w-sm md:items-start">
           <Image
