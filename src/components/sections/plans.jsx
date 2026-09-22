@@ -4,7 +4,7 @@ import { PLANS } from "@/data/plans";
 
 export default function Plans() {
   return (
-    <section className="w-full bg-linear-to-br from-plans-start to-plans-end px-6 py-16 lg:py-24" id="planos">
+    <section className="w-full px-6 py-16 lg:py-24" id="planos">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-display text-3xl font-medium text-white lg:text-5xl">
           <span className="block">Apoie de forma</span>

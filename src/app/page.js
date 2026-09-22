@@ -14,9 +14,11 @@ export default function Home() {
         <Hero />
         <Testimonials />
         <Cause />
-        <Impact />
-        <Plans />
-        <Footer />
+        <div className="bg-linear-to-b from-accent via-plans-start to-plans-end">
+          <Impact />
+          <Plans />
+          <Footer />
+        </div>
       </main>
     </>
   );

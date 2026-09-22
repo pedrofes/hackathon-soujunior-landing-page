@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="flex h-auto min-h-[380px] w-full flex-col items-start justify-center gap-[70px] bg-linear-to-br from-plans-start to-plans-end px-6 py-12 md:px-12 lg:h-[380px] lg:px-[120px] lg:py-0"
+      className="flex h-auto min-h-[380px] w-full flex-col items-start justify-center gap-[70px] px-6 py-12 md:px-12 lg:h-[380px] lg:px-[120px] lg:py-0"
     >
       {/* Parte superior do Footer */}
       <div className="flex w-full flex-col items-center gap-8 md:flex-row md:justify-between">
