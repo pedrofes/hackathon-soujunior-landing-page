@@ -109,7 +109,7 @@ export default function CauseCarousel({ causes }) {
               key={`${item.id}-${index}`}
               className="shrink-0 w-full sm:w-1/2 lg:w-1/3 px-3"
             >
-              <article className="relative h-[440px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-secondary/40 group transition-all duration-300 hover:-translate-y-2 hover:border-primary/50">
+              <article className="relative h-[440px] rounded-2xl overflow-hidden border border-white/10 bg-secondary/40 group transition-all duration-300 hover:-translate-y-2 hover:border-primary/50">
                 <Image
                   src={item.image}
                   alt={item.alt}

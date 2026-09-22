@@ -56,9 +56,9 @@ export default function Impact() {
   return (
     <section
       id="impacto"
-      className="w-full px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
+      className="flex w-full min-h-screen flex-col items-center justify-center px-6 py-16 lg:py-20"
     >
-      <div className="mx-auto max-w-4xl text-center">
+      <div className="w-full max-w-8xl text-center mb-54">
         <h2 className="font-display text-[28px] font-bold text-white">
           O seu apoio nos ajuda
           <br />a <span className="text-yellow-accent">impactar</span> cada vez mais
@@ -66,15 +66,12 @@ export default function Impact() {
 
         {/* Diagrama de impacto — visível a partir de md, com posicionamento absoluto fiel ao design */}
         <div className="relative mx-auto mt-10 hidden h-[400px] max-w-xl items-center justify-center md:flex">
-          <div className="absolute h-[320px] w-[320px] rounded-full border border-white/15" />
-          <div className="absolute h-[220px] w-[220px] rounded-full border border-white/15" />
-
           <Image
             src="/impact.png"
             alt="Ícone de impacto da SouJunior"
             width={624}
             height={624}
-            className="relative z-10 h-28 w-28 drop-shadow-2xl lg:h-32 lg:w-32"
+            className="relative h-72 w-72 drop-shadow-2xl lg:h-80 lg:w-80"
           />
 
           <StatCard

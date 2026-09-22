@@ -1,6 +1,6 @@
 export default function PlanCard({ plan }) {
   return (
-    <article className="rounded-[2rem] border border-white/25 bg-white/5 p-8 shadow-xl backdrop-blur-md lg:p-10">
+    <article className="w-full max-w-xs rounded-[2rem] border border-white/25 bg-white/5 p-8 shadow-xl backdrop-blur-md lg:p-10">
       <p className="font-display text-3xl font-medium text-white lg:text-4xl">
         {plan.price}
         <span>{plan.period}</span>

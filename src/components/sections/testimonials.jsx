@@ -4,16 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import { TESTIMONIALS } from "@/data/testimonials";
 
-const AUTOPLAY_INTERVAL_MS = 3000;
+const AUTOPLAY_INTERVAL_MS = 4500;
+const COUNT = TESTIMONIALS.length;
+// Triplica a lista para permitir loop infinito: sempre navegamos dentro da
+// cópia do meio e "teletransportamos" (sem animação) de volta para lá assim
+// que o autoplay ultrapassa uma das cópias extras nas pontas.
+const EXTENDED_TESTIMONIALS = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
 
 export default function Testimonials() {
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
-  const indexRef = useRef(0);
+  const indexRef = useRef(COUNT);
   const isPausedRef = useRef(false);
+  const isRealigningRef = useRef(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const goTo = (index) => {
+  const goTo = (index, behavior = "smooth") => {
     indexRef.current = index;
 
     const container = containerRef.current;
@@ -27,25 +33,33 @@ export default function Testimonials() {
     const cardOffsetLeft = cardRect.left - containerRect.left + container.scrollLeft;
     const targetScrollLeft = cardOffsetLeft - (container.clientWidth - card.clientWidth) / 2;
 
-    container.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+    container.scrollTo({ left: targetScrollLeft, behavior });
   };
 
-  // Autoplay: avança para o próximo depoimento a cada 3s.
+  // Posiciona o carrossel na cópia do meio assim que os cards estão medidos,
+  // sem nenhuma animação visível.
+  useEffect(() => {
+    goTo(COUNT, "auto");
+  }, []);
+
+  // Autoplay: avança para o próximo depoimento periodicamente, sem nunca parecer terminar.
   useEffect(() => {
     const interval = setInterval(() => {
-      if (isPausedRef.current) return;
-      goTo((indexRef.current + 1) % TESTIMONIALS.length);
+      if (isPausedRef.current || isRealigningRef.current) return;
+      goTo(indexRef.current + 1);
     }, AUTOPLAY_INTERVAL_MS);
 
     return () => clearInterval(interval);
   }, []);
 
-  // Mantém as bolinhas sincronizadas quando o usuário arrasta o scroll manualmente.
+  // Mantém as bolinhas sincronizadas e realinha o loop infinito quando o
+  // scroll (por autoplay ou arraste manual) chega perto das cópias extras.
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let ticking = false;
+    let realignTimeout;
 
     const updateActiveFromScroll = () => {
       ticking = false;
@@ -68,7 +82,22 @@ export default function Testimonials() {
       });
 
       indexRef.current = closestIndex;
-      setActiveIndex(closestIndex);
+      setActiveIndex(((closestIndex % COUNT) + COUNT) % COUNT);
+
+      // Espera o scroll assentar antes de checar se precisa realinhar,
+      // evitando teletransportar o carrossel no meio de um gesto de arraste.
+      clearTimeout(realignTimeout);
+      realignTimeout = setTimeout(() => {
+        if (closestIndex < COUNT) {
+          isRealigningRef.current = true;
+          goTo(closestIndex + COUNT, "auto");
+          isRealigningRef.current = false;
+        } else if (closestIndex >= COUNT * 2) {
+          isRealigningRef.current = true;
+          goTo(closestIndex - COUNT, "auto");
+          isRealigningRef.current = false;
+        }
+      }, 150);
     };
 
     const handleScroll = () => {
@@ -78,7 +107,10 @@ export default function Testimonials() {
     };
 
     container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      clearTimeout(realignTimeout);
+    };
   }, []);
 
   return (
@@ -103,9 +135,9 @@ export default function Testimonials() {
               "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
           }}
         >
-          {TESTIMONIALS.map((testimonial, index) => (
+          {EXTENDED_TESTIMONIALS.map((testimonial, index) => (
             <div
-              key={testimonial.id}
+              key={`${testimonial.id}-${index}`}
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
@@ -121,7 +153,7 @@ export default function Testimonials() {
             <button
               key={testimonial.id}
               type="button"
-              onClick={() => goTo(index)}
+              onClick={() => goTo(COUNT + index)}
               aria-label={`Ir para o depoimento de ${testimonial.name}`}
               aria-current={index === activeIndex}
               className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${

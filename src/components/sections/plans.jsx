@@ -19,7 +19,7 @@ export default function Plans() {
 
           <div className="hidden w-px self-stretch bg-white/20 lg:block" />
 
-          <div className="text-center lg:text-left">
+          <div className="text-center">
             <h3 className="font-display text-2xl font-medium text-white lg:text-4xl">
               Faça parte dessa transformação.
             </h3>

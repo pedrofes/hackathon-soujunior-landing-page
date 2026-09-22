@@ -34,7 +34,7 @@ export default function PlanCarousel({ plans }) {
     : {};
 
   return (
-    <div className="relative" {...carouselAria} onKeyDown={handleKeyDown}>
+    <div className="relative mx-auto w-full max-w-xs" {...carouselAria} onKeyDown={handleKeyDown}>
       <div className="grid">
         {plans.map((plan, index) => {
           const isCurrent = index === current;
@@ -75,7 +75,7 @@ export default function PlanCarousel({ plans }) {
             type="button"
             onClick={goPrev}
             aria-label="Plano anterior"
-            className={`${arrowClasses} -left-3 xl:-left-10`}
+            className={`${arrowClasses} -left-12`}
           >
             <span aria-hidden="true">&lsaquo;</span>
           </button>
@@ -84,7 +84,7 @@ export default function PlanCarousel({ plans }) {
             type="button"
             onClick={goNext}
             aria-label="Próximo plano"
-            className={`${arrowClasses} -right-3 xl:-right-10`}
+            className={`${arrowClasses} -right-12`}
           >
             <span aria-hidden="true">&rsaquo;</span>
           </button>

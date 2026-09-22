@@ -14,7 +14,7 @@ export default function Home() {
         <Hero />
         <Testimonials />
         <Cause />
-        <div className="bg-linear-to-b from-accent via-plans-start to-plans-end">
+        <div className="bg-linear-to-b from-accent via-plans-start via-[27%] to-plans-end">
           <Impact />
           <Plans />
           <Footer />
