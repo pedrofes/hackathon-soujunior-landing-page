@@ -2,8 +2,16 @@
 
 /* Compensa a altura do header sticky ao navegar por âncora (#depoimentos, #causa, etc.),
    evitando que ele cubra o topo da seção de destino. */
+
 html {
   scroll-padding-top: 110px;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 @theme {
