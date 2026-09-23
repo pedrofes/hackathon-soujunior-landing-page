@@ -43,7 +43,7 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="w-full bg-linear-to-br from-plans-start to-plans-end py-10 lg:py-12"
+      className="w-full bg-linear-to-br from-plans-start to-plans-end py-12 lg:py-16"
     >
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-6 md:px-10 lg:px-8">
 
@@ -64,6 +64,7 @@ export default function Footer() {
           </p>
         </div>
 
+
         {/* Redes sociais */}
         <div className="flex w-full flex-wrap items-center justify-center gap-8 md:justify-start lg:gap-12">
           {SOCIAL_LINKS.map((social) => (
@@ -72,7 +73,7 @@ export default function Footer() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-transform duration-200 hover:scale-105"
+              className="transition-transform duration-200 hover:scale-105 active:scale-95"
               aria-label={social.ariaLabel}
             >
               <Image

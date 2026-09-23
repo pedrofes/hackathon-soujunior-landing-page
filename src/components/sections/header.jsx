@@ -55,7 +55,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 pt-5 px-4 sm:px-6">
+    <header className="sticky top-0 z-50 w-full pt-3 sm:pt-5 px-4 sm:px-6">
       {/* 
         Cápsula de Vidro Inteligente:
         - No topo: usa o glass-card cristalino que você aprovou.
@@ -135,7 +135,7 @@ export default function Header() {
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          className="flex h-10 w-10 items-center justify-center text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white rounded-full min-[1000px]:hidden cursor-pointer"
+          className="flex h-10 w-10 items-center justify-center text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white rounded-full min-[1000px]:hidden cursor-pointer touch-manipulation"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? (

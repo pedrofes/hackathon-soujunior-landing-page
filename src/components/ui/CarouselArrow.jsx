@@ -20,7 +20,7 @@ export default function CarouselArrow({
       onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel || defaultLabel}
-      className={`z-20 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:text-white hover:scale-110 active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/80 disabled:pointer-events-none disabled:opacity-30 ${className}`}
+      className={`z-20 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/70 transition-all duration-200 hover:text-white hover:scale-110 active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/80 disabled:pointer-events-none disabled:opacity-30 touch-manipulation cursor-pointer ${className}`}
     >
       <svg
         className="h-8 w-8 sm:h-9 sm:w-9"

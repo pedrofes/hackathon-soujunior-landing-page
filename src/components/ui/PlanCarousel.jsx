@@ -42,7 +42,7 @@ export default function PlanCarousel({ plans }) {
     }
   };
 
-  // Touch handlers para suporte ergonômico a swipe no mobile
+  // Touch handlers para suporte nativo a swipe no mobile
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -79,22 +79,22 @@ export default function PlanCarousel({ plans }) {
 
   return (
     <div
-      className="relative w-full px-7 sm:px-9 focus:outline-hidden"
+      className="relative w-full min-w-0 max-w-full px-8 sm:px-10 outline-none focus:outline-none ring-0 focus:ring-0"
       role="region"
       aria-roledescription="carrossel"
       aria-label="Planos de apoio"
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
-      {/* Viewport do carrossel com deslizamento suave */}
+      {/* Viewport do carrossel */}
       <div
-        className="overflow-hidden py-3"
+        className="w-full min-w-0 overflow-hidden py-5 -my-2"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex transition-transform duration-500 ease-out will-change-transform"
+          className="flex w-full will-change-transform transition-transform duration-500 ease-out select-none"
           style={{
             transform: `translateX(-${current * 100}%)`,
           }}
@@ -104,7 +104,7 @@ export default function PlanCarousel({ plans }) {
             return (
               <div
                 key={plan.id}
-                className="w-full shrink-0 px-2"
+                className="w-full min-w-full shrink-0 px-2"
                 aria-hidden={!isCurrent}
               >
                 <PlanCard plan={plan} />

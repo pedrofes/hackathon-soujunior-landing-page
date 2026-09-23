@@ -30,7 +30,7 @@ export default function CarouselDots({
               onClick={() => onDotClick && onDotClick(index)}
               aria-label={`Ir para ${itemTitle}`}
               aria-current={isActive ? "true" : undefined}
-              className="group flex h-9 w-9 items-center justify-center rounded-full transition-transform active:scale-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white"
+              className="group flex h-9 w-9 items-center justify-center rounded-full transition-transform active:scale-90 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white touch-manipulation cursor-pointer"
             >
               {/* Esfera de Vidro inspirada na Navbar */}
               <span
