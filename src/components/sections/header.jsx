@@ -8,18 +8,14 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const sectionIds = ["hero", "depoimentos", "causa", "impacto", "planos"];
+    const sectionIds = ["causa", "impacto", "planos"];
 
     const updateActiveSection = () => {
       const footer = document.getElementById("footer");
 
       if (footer) {
         const footerRect = footer.getBoundingClientRect();
-
-        const footerReachedActiveArea =
-          footerRect.top <= window.innerHeight * 0.8;
-
-        if (footerReachedActiveArea) {
+        if (footerRect.top <= window.innerHeight * 0.8) {
           setActiveSection("");
           return;
         }
@@ -29,22 +25,12 @@ export default function Header() {
 
       const currentSection = sectionIds.find((id) => {
         const section = document.getElementById(id);
-
-        if (!section) {
-          return false;
-        }
-
+        if (!section) return false;
         const rect = section.getBoundingClientRect();
-
         return rect.top <= referencePoint && rect.bottom > referencePoint;
       });
 
-      if (
-        currentSection === "depoimentos" ||
-        currentSection === "causa" ||
-        currentSection === "impacto" ||
-        currentSection === "planos"
-      ) {
+      if (currentSection) {
         setActiveSection(currentSection);
       } else {
         setActiveSection("");
@@ -52,7 +38,6 @@ export default function Header() {
     };
 
     updateActiveSection();
-
     window.addEventListener("scroll", updateActiveSection);
     window.addEventListener("resize", updateActiveSection);
 
@@ -68,105 +53,98 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-accent pt-6 px-6 min-[1000px]:bg-transparent">
-      <nav className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md px-6 h-[55px] w-full max-w-[1222px] mx-auto">
+    <header className="sticky top-0 z-50 pt-5 px-4 sm:px-6">
+      {/* Cápsula de Vidro Centralizada com o token glass-card */}
+      <nav className="flex items-center justify-between glass-card rounded-full px-5 sm:px-7 h-[56px] w-full max-w-[1220px] mx-auto">
 
-        <div>
+        {/* Logo SouJunior */}
+        <a href="#hero" className="flex items-center">
           <Image
             src="/images/logo-soujunior-white-small.svg"
             alt="SouJunior"
-            width={157}
+            width={150}
             height={24}
+            priority
+            className="h-auto w-32 sm:w-36 drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
           />
-        </div>
+        </a>
 
-        <div className="hidden min-[1000px]:flex gap-8 font-radio text-base font-medium text-lavender">
-          <a
-            href="#depoimentos"
-            className="relative group"
-            onClick={() => handleNavClick("depoimentos")}
-          >
-            Depoimentos
-            <span
-              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "depoimentos" ? "opacity-100" : "opacity-0"
-                }`}
-            />
-          </a>
-
-          <a
-            href="#causa"
-            className="relative group"
-            onClick={() => handleNavClick("causa")}
-          >
-            Por que apoiar?
-            <span
-              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "causa" ? "opacity-100" : "opacity-0"
-                }`}
-            />
-          </a>
+        {/* Links Centrais (Desktop) */}
+        <div className="hidden min-[1000px]:flex items-center gap-8 font-sans text-sm font-medium text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">          <a
+          href="#causa"
+          onClick={() => handleNavClick("causa")}
+          className={`transition-colors hover:text-white pb-1 ${activeSection === "causa"
+            ? "text-white border-b-2 border-yellow-accent font-semibold"
+            : "text-white/80"
+            }`}
+        >
+          Por que apoiar?
+        </a>
 
           <a
             href="#impacto"
-            className="relative group"
             onClick={() => handleNavClick("impacto")}
+            className={`transition-colors hover:text-white pb-1 ${activeSection === "impacto"
+              ? "text-white border-b-2 border-yellow-accent font-semibold"
+              : "text-white/80"
+              }`}
           >
             Impacto
-            <span
-              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "impacto" ? "opacity-100" : "opacity-0"
-                }`}
-            />
           </a>
 
           <a
             href="#planos"
-            className="relative group"
             onClick={() => handleNavClick("planos")}
+            className={`transition-colors hover:text-white pb-1 ${activeSection === "planos"
+              ? "text-white border-b-2 border-yellow-accent font-semibold"
+              : "text-white/80"
+              }`}
           >
             Planos
-            <span
-              className={`absolute left-1/2 top-full mt-1 h-1 w-12 -translate-x-1/2 bg-yellow-accent transition-opacity duration-200 group-hover:opacity-100 group-focus:opacity-100 ${activeSection === "planos" ? "opacity-100" : "opacity-0"
-                }`}
-            />
           </a>
         </div>
 
+        {/* Botão Amarelo Pílula (Desktop) */}
         <a
           href="https://apoia.se/soujunior"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden min-[1000px]:flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent text-[15.361px] font-bold text-dark-text active:bg-primary active:text-white hover:scale-105 transition-transform duration-200"
+          className="hidden min-[1000px]:flex items-center justify-center rounded-full bg-yellow-accent text-dark-text font-bold text-xs sm:text-sm px-5 py-2.5 hover:scale-105 active:scale-95 transition-all duration-200 shadow-md"
         >
           Quero apoiar
         </a>
 
+        {/* Botão Hambúrguer Ergonômico (Mobile) */}
         <button
           type="button"
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/30 text-2xl text-white min-[1000px]:hidden"
+          className="flex h-10 w-10 items-center justify-center text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white rounded-full min-[1000px]:hidden cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? "✕" : "☰"}
+          {menuOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
-
       </nav>
 
+      {/* Menu Suspenso Mobile com glass-card */}
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="mt-2 flex flex-col gap-4 rounded-2xl border border-white/20 bg-accent px-6 py-5 font-radio text-lavender min-[1000px]:hidden"
+          className="mt-3 flex flex-col gap-4 rounded-3xl glass-card px-6 py-5 text-white min-[1000px]:hidden shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
         >
-          <a
-            href="#depoimentos"
-            onClick={() => handleNavClick("depoimentos")}
-          >
-            Depoimentos
-          </a>
-
           <a
             href="#causa"
             onClick={() => handleNavClick("causa")}
+            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
           >
             Por que apoiar?
           </a>
@@ -174,6 +152,7 @@ export default function Header() {
           <a
             href="#impacto"
             onClick={() => handleNavClick("impacto")}
+            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
           >
             Impacto
           </a>
@@ -181,6 +160,7 @@ export default function Header() {
           <a
             href="#planos"
             onClick={() => handleNavClick("planos")}
+            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
           >
             Planos
           </a>
@@ -190,13 +170,12 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuOpen(false)}
-            className="flex h-[37px] w-[137px] items-center justify-center rounded-[9.6px] border-[0.96px] border-yellow-accent bg-yellow-accent font-sans text-[15.361px] font-bold text-dark-text transition-transform duration-200 hover:scale-105 active:bg-primary active:text-white"
+            className="flex items-center justify-center rounded-full bg-yellow-accent font-bold text-dark-text text-sm py-3 mt-2 shadow-md hover:scale-105 active:scale-95 transition-all"
           >
             Quero apoiar
           </a>
         </div>
       )}
-
     </header>
   );
 }
