@@ -6,13 +6,16 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const sectionIds = ["causa", "impacto", "planos"];
 
-    const updateActiveSection = () => {
-      const footer = document.getElementById("footer");
+    const handleScroll = () => {
+      // Ativa o escudo de contraste inteligente ao rolar
+      setIsScrolled(window.scrollY > 20);
 
+      const footer = document.getElementById("footer");
       if (footer) {
         const footerRect = footer.getBoundingClientRect();
         if (footerRect.top <= window.innerHeight * 0.8) {
@@ -22,7 +25,6 @@ export default function Header() {
       }
 
       const referencePoint = window.innerHeight * 0.35;
-
       const currentSection = sectionIds.find((id) => {
         const section = document.getElementById(id);
         if (!section) return false;
@@ -37,13 +39,13 @@ export default function Header() {
       }
     };
 
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection);
-    window.addEventListener("resize", updateActiveSection);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
@@ -54,10 +56,19 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 pt-5 px-4 sm:px-6">
-      {/* Cápsula de Vidro Centralizada com o token glass-card */}
-      <nav className="flex items-center justify-between glass-card rounded-full px-5 sm:px-7 h-[56px] w-full max-w-[1220px] mx-auto">
-
-        {/* Logo SouJunior */}
+      {/* 
+        Cápsula de Vidro Inteligente:
+        - No topo: usa o glass-card cristalino que você aprovou.
+        - Ao rolar: ativa suavemente um fundo fumê de proteção para contraste impecável sobre qualquer card branco.
+      */}
+      <nav
+        className={`flex items-center justify-between rounded-full px-5 sm:px-7 h-[56px] w-full max-w-[1220px] mx-auto transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#060C38]/40 backdrop-blur-xl border border-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
+            : "glass-card"
+        }`}
+      >
+        {/* Logo SouJunior com contorno de alta legibilidade */}
         <a href="#hero" className="flex items-center">
           <Image
             src="/images/logo-soujunior-white-small.svg"
@@ -65,29 +76,32 @@ export default function Header() {
             width={150}
             height={24}
             priority
-            className="h-auto w-32 sm:w-36 drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]"
+            className="h-auto w-32 sm:w-36 drop-shadow-[0_1px_2px_rgba(0,0,0,0.95)] drop-shadow-[0_0_1px_rgba(0,0,0,0.85)]"
           />
         </a>
 
-        {/* Links Centrais (Desktop) */}
-        <div className="hidden min-[1000px]:flex items-center gap-8 font-sans text-sm font-medium text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">          <a
-          href="#causa"
-          onClick={() => handleNavClick("causa")}
-          className={`transition-colors hover:text-white pb-1 ${activeSection === "causa"
-            ? "text-white border-b-2 border-yellow-accent font-semibold"
-            : "text-white/80"
+        {/* Links Centrais (Desktop) com sombra de silhueta */}
+        <div className="hidden min-[1000px]:flex items-center gap-8 font-sans text-sm font-medium text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
+          <a
+            href="#causa"
+            onClick={() => handleNavClick("causa")}
+            className={`transition-colors hover:text-white pb-1 ${
+              activeSection === "causa"
+                ? "text-white border-b-2 border-yellow-accent font-semibold"
+                : "text-white/85"
             }`}
-        >
-          Por que apoiar?
-        </a>
+          >
+            Por que apoiar?
+          </a>
 
           <a
             href="#impacto"
             onClick={() => handleNavClick("impacto")}
-            className={`transition-colors hover:text-white pb-1 ${activeSection === "impacto"
-              ? "text-white border-b-2 border-yellow-accent font-semibold"
-              : "text-white/80"
-              }`}
+            className={`transition-colors hover:text-white pb-1 ${
+              activeSection === "impacto"
+                ? "text-white border-b-2 border-yellow-accent font-semibold"
+                : "text-white/85"
+            }`}
           >
             Impacto
           </a>
@@ -95,10 +109,11 @@ export default function Header() {
           <a
             href="#planos"
             onClick={() => handleNavClick("planos")}
-            className={`transition-colors hover:text-white pb-1 ${activeSection === "planos"
-              ? "text-white border-b-2 border-yellow-accent font-semibold"
-              : "text-white/80"
-              }`}
+            className={`transition-colors hover:text-white pb-1 ${
+              activeSection === "planos"
+                ? "text-white border-b-2 border-yellow-accent font-semibold"
+                : "text-white/85"
+            }`}
           >
             Planos
           </a>
@@ -135,11 +150,11 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Menu Suspenso Mobile com glass-card */}
+      {/* Menu Suspenso Mobile */}
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="mt-3 flex flex-col gap-4 rounded-3xl glass-card px-6 py-5 text-white min-[1000px]:hidden shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
+          className="mt-3 flex flex-col gap-4 rounded-3xl bg-[#060C38]/95 backdrop-blur-xl border border-white/20 px-6 py-5 text-white min-[1000px]:hidden shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
         >
           <a
             href="#causa"
