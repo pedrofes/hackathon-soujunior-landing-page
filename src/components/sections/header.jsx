@@ -1,12 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Trava para evitar que a rolagem suave do clique dispare flicker de seções intermediárias
+  const isClickScrollingRef = useRef(false);
+  const clickTimeoutRef = useRef(null);
 
   useEffect(() => {
     const sectionIds = ["causa", "impacto", "planos"];
@@ -14,6 +18,9 @@ export default function Header() {
     const handleScroll = () => {
       // Ativa o escudo de contraste inteligente ao rolar
       setIsScrolled(window.scrollY > 20);
+
+      // Se o usuário clicou em um link da navbar, trava a alteração da linha durante a viagem do scroll
+      if (isClickScrollingRef.current) return;
 
       const footer = document.getElementById("footer");
       if (footer) {
@@ -46,12 +53,20 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
     };
   }, []);
 
   const handleNavClick = (section) => {
     setActiveSection(section);
     setMenuOpen(false);
+
+    // Ativa a trava pelo tempo suficiente para a animação do smooth scroll concluir
+    isClickScrollingRef.current = true;
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 850);
   };
 
   return (
@@ -82,41 +97,33 @@ export default function Header() {
 
         {/* Links Centrais (Desktop) com sombra de silhueta */}
         <div className="hidden min-[1000px]:flex items-center gap-8 font-sans text-sm font-medium text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.85)]">
-          <a
-            href="#causa"
-            onClick={() => handleNavClick("causa")}
-            className={`transition-colors hover:text-white pb-1 ${
-              activeSection === "causa"
-                ? "text-white border-b-2 border-yellow-accent font-semibold"
-                : "text-white/85"
-            }`}
-          >
-            Por que apoiar?
-          </a>
-
-          <a
-            href="#impacto"
-            onClick={() => handleNavClick("impacto")}
-            className={`transition-colors hover:text-white pb-1 ${
-              activeSection === "impacto"
-                ? "text-white border-b-2 border-yellow-accent font-semibold"
-                : "text-white/85"
-            }`}
-          >
-            Impacto
-          </a>
-
-          <a
-            href="#planos"
-            onClick={() => handleNavClick("planos")}
-            className={`transition-colors hover:text-white pb-1 ${
-              activeSection === "planos"
-                ? "text-white border-b-2 border-yellow-accent font-semibold"
-                : "text-white/85"
-            }`}
-          >
-            Planos
-          </a>
+          {[
+            { id: "causa", label: "Por que apoiar?" },
+            { id: "impacto", label: "Impacto" },
+            { id: "planos", label: "Planos" },
+          ].map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => handleNavClick(item.id)}
+                className={`relative py-1 transition-colors duration-200 hover:text-white ${
+                  isActive ? "text-white font-semibold" : "text-white/85"
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute -bottom-0.5 left-0 right-0 h-0.5 rounded-full bg-yellow-accent transition-all duration-300 ease-out origin-center pointer-events-none ${
+                    isActive
+                      ? "opacity-100 scale-x-100"
+                      : "opacity-0 scale-x-0"
+                  }`}
+                  aria-hidden="true"
+                />
+              </a>
+            );
+          })}
         </div>
 
         {/* Botão Amarelo Pílula (Desktop) */}
@@ -156,29 +163,30 @@ export default function Header() {
           id="mobile-menu"
           className="mt-3 flex flex-col gap-4 rounded-3xl bg-[#060C38]/95 backdrop-blur-xl border border-white/20 px-6 py-5 text-white min-[1000px]:hidden shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200"
         >
-          <a
-            href="#causa"
-            onClick={() => handleNavClick("causa")}
-            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
-          >
-            Por que apoiar?
-          </a>
-
-          <a
-            href="#impacto"
-            onClick={() => handleNavClick("impacto")}
-            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
-          >
-            Impacto
-          </a>
-
-          <a
-            href="#planos"
-            onClick={() => handleNavClick("planos")}
-            className="text-base font-medium py-1 hover:text-yellow-accent transition-colors"
-          >
-            Planos
-          </a>
+          {[
+            { id: "causa", label: "Por que apoiar?" },
+            { id: "impacto", label: "Impacto" },
+            { id: "planos", label: "Planos" },
+          ].map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => handleNavClick(item.id)}
+                className={`flex items-center justify-between text-base font-medium py-1 transition-colors ${
+                  isActive
+                    ? "text-yellow-accent font-semibold"
+                    : "text-white hover:text-yellow-accent"
+                }`}
+              >
+                <span>{item.label}</span>
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-yellow-accent shadow-[0_0_8px_#FACC15]" />
+                )}
+              </a>
+            );
+          })}
 
           <a
             href="https://apoia.se/soujunior"
