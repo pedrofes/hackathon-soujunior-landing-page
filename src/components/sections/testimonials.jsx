@@ -151,11 +151,14 @@ export default function Testimonials() {
         {/* Trilho de rolagem contínua fluida */}
         <div
           ref={containerRef}
+          role="region"
+          aria-label="Carrossel de depoimentos"
+          tabIndex={0}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          className="flex gap-6 overflow-x-auto px-6 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none cursor-grab active:cursor-grabbing will-change-scroll"
+          className="flex gap-6 overflow-x-auto px-6 pb-4 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/40 rounded-2xl [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none cursor-grab active:cursor-grabbing will-change-scroll"
           style={{
             maskImage:
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
@@ -163,17 +166,22 @@ export default function Testimonials() {
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          {EXTENDED_TESTIMONIALS.map((testimonial, index) => (
-            <div
-              key={`${testimonial.id}-${index}`}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-              className="shrink-0"
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </div>
-          ))}
+          {EXTENDED_TESTIMONIALS.map((testimonial, index) => {
+            const isClone = index >= TESTIMONIALS.length;
+            return (
+              <div
+                key={`${testimonial.id}-${index}`}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
+                className="shrink-0"
+                aria-hidden={isClone ? "true" : undefined}
+                {...(isClone ? { inert: "" } : {})}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            );
+          })}
         </div>
 
         {/* Indicadores sincronizados */}

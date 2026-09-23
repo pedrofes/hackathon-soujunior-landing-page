@@ -11,7 +11,6 @@ export default function CauseCarousel({ causes }) {
 
   const [currentIndex, setCurrentIndex] = useState(count);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const [visibleCount, setVisibleCount] = useState(3);
   const isMoving = useRef(false);
 
   // Refs para controle preciso de Touch-Swipe no mobile
@@ -19,24 +18,6 @@ export default function CauseCarousel({ causes }) {
   const touchStartY = useRef(0);
   const touchDeltaX = useRef(0);
   const isSwiping = useRef(false);
-
-  // Detecta a largura da tela para saber quantos cards estão visíveis (1 mobile, 2 tablet, 3 desktop)
-  useEffect(() => {
-    const updateVisibleCount = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setVisibleCount(1);
-      } else if (width < 1024) {
-        setVisibleCount(2);
-      } else {
-        setVisibleCount(3);
-      }
-    };
-
-    updateVisibleCount();
-    window.addEventListener("resize", updateVisibleCount);
-    return () => window.removeEventListener("resize", updateVisibleCount);
-  }, []);
 
   // Navegar para o próximo card
   const goNext = useCallback(() => {
@@ -54,7 +35,10 @@ export default function CauseCarousel({ causes }) {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (e) => {
+    // Filtra para evitar que transições de elementos filhos disparem o fim do carrossel
+    if (e && e.target !== e.currentTarget) return;
+
     isMoving.current = false;
     if (currentIndex >= count * 2) {
       setIsTransitioning(false);
@@ -135,7 +119,7 @@ export default function CauseCarousel({ causes }) {
       tabIndex={0}
     >
       <div
-        className="overflow-hidden py-4 -mx-3"
+        className="[--visible-count:1] sm:[--visible-count:2] lg:[--visible-count:3] overflow-hidden py-4 -mx-3"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -143,44 +127,49 @@ export default function CauseCarousel({ causes }) {
         <div
           onTransitionEnd={handleTransitionEnd}
           style={{
-            transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
+            transform: `translateX(calc(-${currentIndex} * (100% / var(--visible-count))))`,
             transition: isTransitioning
               ? "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)"
               : "none",
           }}
           className="flex will-change-transform select-none"
         >
-          {extendedCauses.map((item, index) => (
-            <div
-              key={`${item.id}-${index}`}
-              className="shrink-0 w-full sm:w-1/2 lg:w-1/3 px-3"
-            >
-              <article className="relative h-[440px] rounded-2xl overflow-hidden border border-white/15 shadow-xl bg-secondary/40 group transition-all duration-300 hover:-translate-y-2 hover:border-primary/50">
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none select-none"
-                />
+          {extendedCauses.map((item, index) => {
+            const isClone = index < count || index >= count * 2;
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="shrink-0 w-full sm:w-1/2 lg:w-1/3 px-3"
+                aria-hidden={isClone ? "true" : undefined}
+                {...(isClone ? { inert: "" } : {})}
+              >
+                <article className="relative h-[440px] rounded-2xl overflow-hidden border border-white/15 shadow-xl bg-secondary/40 group transition-all duration-300 hover:-translate-y-2 hover:border-primary/50">
+                  <Image
+                    src={item.image}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none select-none"
+                  />
 
-                {/* Overlay Escuro balanceado: topo nítido e base com contraste 100% legível */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 via-45% to-transparent pointer-events-none"
-                  aria-hidden="true"
-                />
+                  {/* Overlay Escuro balanceado: topo nítido e base com contraste 100% legível */}
+                  <div
+                    className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 via-45% to-transparent pointer-events-none"
+                    aria-hidden="true"
+                  />
 
-                <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-end text-left z-10 pointer-events-none">
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">
-                    {item.title}
-                  </h3>
-                  <p className="font-sans text-xs sm:text-sm text-white/90 leading-relaxed drop-shadow-sm">
-                    {item.description}
-                  </p>
-                </div>
-              </article>
-            </div>
-          ))}
+                  <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-end text-left z-10 pointer-events-none">
+                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">
+                      {item.title}
+                    </h3>
+                    <p className="font-sans text-xs sm:text-sm text-white/90 leading-relaxed drop-shadow-sm">
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
+              </div>
+            );
+          })}
         </div>
       </div>
 
