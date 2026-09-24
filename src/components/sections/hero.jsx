@@ -32,8 +32,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Lado direito: Mascote 3D em camada sobreposta e escala proporcional conforme o Figma */}
-        <div className="hidden md:flex shrink-0 items-center justify-center relative z-0 md:-ml-45 lg:-ml-12 xl:-ml-16 2xl:-ml-20 pointer-events-none select-none">          <Image
+<div className="hidden md:flex shrink-0 items-center justify-center relative z-0 md:-ml-45 lg:-ml-24 xl:-ml-32 2xl:-ml-40 pointer-events-none select-none">          <Image
           src="/sou_junior_mascote.svg"
           alt="Mascote da SouJunior comemorando com livros"
           width={640}
