@@ -30,7 +30,7 @@ Criação da Landing page para o Hackathon SouJunior. Campanha de arrecadação 
 
 A [SouJunior](https://github.com/SouJunior) é uma comunidade que apoia profissionais em início de carreira na área de tecnologia através de mentorias, conteúdos e projetos práticos. Para sustentar essa operação (infraestrutura, eventos, ferramentas), a comunidade mantém uma campanha de apoio recorrente no Apoia.se.
 
-Esta landing page foi desenvolvida em 15 dias por um squad multidisciplinar (dev, UX/UI, QA, PO e PM) como projeto do hackathon interno, com o critério oficial de avaliação **"Qualidade de Software e Arquitetura"** valendo 30% da nota — por isso o projeto segue padrões explícitos de Git, código e revisão, documentados em [`CONTRIBUTING.md`](CONTRIBUTING.md) e [`docs/criterios-tecnicos-nextjs.md`](docs/criterios-tecnicos-nextjs.md).
+Esta landing page foi desenvolvida em 15 dias por um squad multidisciplinar (dev, UX/UI, QA, PO e PM), denominado Stack Junior, como projeto do hackathon interno, com o critério oficial de avaliação **"Qualidade de Software e Arquitetura"** valendo 30% da nota. Por isso o projeto segue padrões explícitos de Git, código e revisão, documentados em [`CONTRIBUTING.md`](CONTRIBUTING.md) e [`docs/criterios-tecnicos-nextjs.md`](docs/criterios-tecnicos-nextjs.md).
 
 ## Ideia e narrativa da página
 
