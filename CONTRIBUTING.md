@@ -60,7 +60,7 @@ feat(hero): adiciona CTA principal com redirecionamento para apoia.se
 fix(footer): corrige link quebrado do Discord
 style(mural-impacto): ajusta contraste dos números para acessibilidade
 docs(readme): adiciona instruções de execução do projeto
-chore(deps): adiciona react-router-dom
+chore(deps): atualiza next para a versão 16.4
 ```
 
 **Regras:**
@@ -109,26 +109,83 @@ chore(deps): adiciona react-router-dom
 
 ---
 
-## 5. Estrutura de pastas sugerida
+## 5. Estrutura de pastas
+
+Projeto em **Next.js (App Router)** — não é React puro: não usamos `react-router-dom` nem `App.jsx`, o roteamento e a montagem das páginas são resolvidos pelo próprio `src/app/`.
 
 ```
-/
-├── public/              # assets estáticos (imagens, favicon)
-├── src/
-│   ├── components/      # componentes React (Hero, MuralImpacto, CTA, Footer...)
-│   ├── styles/          # CSS/estilos globais
-│   ├── assets/          # imagens/ícones usados nos componentes
-│   └── App.jsx
-├── .gitignore
-├── README.md
-└── package.json
+public/
+├── images/                  # fotos, logos e ícones estáticos
+├── sou_junior_mascote.svg
+└── impact.png
+
+src/
+├── app/
+│   ├── layout.js             # layout raiz: fontes (next/font), metadata, Open Graph
+│   ├── page.js                # composição das seções, na ordem do funil de conversão
+│   ├── globals.css            # import do Tailwind + tokens de tema (@theme)
+│   └── opengraph-image.jsx    # imagem de compartilhamento gerada dinamicamente
+├── components/
+│   ├── sections/               # um componente por bloco da landing page
+│   └── ui/                     # componentes reutilizáveis entre seções
+└── data/                       # conteúdo (planos, causas, depoimentos) separado da UI
+
+.gitignore
+README.md
+CONTRIBUTING.md
+package.json
 ```
 
-Cada seção do mapa mental do briefing (`#hero`, `#causa`, `#impacto`, `#planos`, `#footer`) deve virar um componente próprio em `src/components/` — facilita revisão e evita que uma pessoa sobrescreva o trabalho da outra.
+Cada seção do mapa mental do briefing é um componente próprio em `src/components/sections/` — facilita revisão e evita que uma pessoa sobrescreva o trabalho da outra. Peça usada por mais de uma seção, ou que encapsula um padrão de interação (carrossel, botão de CTA), vai em `src/components/ui/`. Conteúdo (textos, preços, links de imagem) fica em `src/data/`, nunca hardcoded dentro do JSX.
 
 ---
 
-## 6. Boas práticas gerais
+## 6. Convenções de nomenclatura e Design Tokens
+
+### Nomes de arquivo
+
+| Pasta | Convenção | Exemplo |
+|---|---|---|
+| `src/components/sections/` | minúsculo, uma palavra em inglês para o bloco (`hero`, `cause`, `impact`, `testimonials`, `plans`, `footer`) | `hero.jsx`, `cause.jsx`, `testimonials.jsx` |
+| `src/components/ui/` | PascalCase, igual ao nome do componente exportado | `CtaButton.jsx`, `PlanCard.jsx`, `CarouselDots.jsx` |
+| `src/data/` | minúsculo, plural do conteúdo que exporta | `causes.js`, `plans.js`, `testimonials.js` |
+
+Não misture os dois padrões numa mesma pasta — se o componente é reaproveitado fora de uma seção específica, ele pertence a `ui/` e usa PascalCase.
+
+### Idioma
+
+- **Código** (nomes de componente, função, prop, arquivo) em **inglês**: `Header`, `Hero`, `CtaButton`, `handleNavClick`.
+- **`id` da `<section>`, conteúdo visível ao usuário e comentários** em **português** — é o idioma do time e do público da campanha. O nome do arquivo é a tradução em inglês do `id` em português usado no menu/URL:
+
+  | Arquivo (inglês) | `id` da seção (português, usado em `#âncora`) |
+  |---|---|
+  | `hero.jsx` | `#hero` |
+  | `cause.jsx` | `#causa` |
+  | `impact.jsx` | `#impacto` |
+  | `testimonials.jsx` | `#depoimentos` |
+  | `plans.jsx` | `#planos` |
+  | `footer.jsx` | `#footer` |
+
+### Design tokens (`src/app/globals.css`)
+
+Não usar cor em hexadecimal direto no componente (`bg-[#0E14BF]`) — sempre pelo token do Tailwind (`@theme`). Se a cor que você precisa ainda não existe, adicione um token novo em `globals.css` em vez de colar o hex no JSX.
+
+| Token | Hex | Uso |
+|---|---|---|
+| `primary` | `#3C7EF9` | Destaques, ícones, barra de progresso |
+| `secondary` | `#0A1662` | Texto/fundo escuro sobre superfícies claras |
+| `accent` | `#0E14BF` | Fundo principal do Hero, Causa e Depoimentos |
+| `neutral` | `#242731` | Texto padrão sobre fundo claro |
+| `base-white` | `#E7E8EA` | Texto claro sobre fundo escuro |
+| `yellow-accent` | `#FACC15` | CTA e destaques de maior prioridade |
+| `dark-surface` / `dark-hover` | `#171123` / `#2A2140` | Botão escuro (estado normal / hover) |
+| `lavender` | `#F0E9FD` | Texto da navbar sobre fundo escuro |
+| `dark-text` | `#1D1B1B` | Texto sobre fundo `yellow-accent` |
+| `plans-start` → `plans-end` | `#474BE0` → `#595DEC` | Gradiente da seção de Planos e do Footer |
+
+---
+
+## 7. Boas práticas gerais
 
 - **`.gitignore`**: incluir `node_modules/`, arquivos de ambiente (`.env`), builds (`dist/`, `build/`) desde o primeiro commit.
 - **Licença open source**: adicionar MIT (a mais simples) já no commit inicial — é requisito de submissão e trava a entrega se esquecido.
