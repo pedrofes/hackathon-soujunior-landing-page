@@ -9,7 +9,6 @@ Criação da Landing page para o Hackathon SouJunior. Campanha de arrecadação 
 ## Sumário
 
 - [Landing Page Apoia.se — SouJunior](#landing-page-apoiase--soujunior)
-  - [Sumário](#sumário)
   - [Sobre o projeto](#sobre-o-projeto)
   - [Ideia e narrativa da página](#ideia-e-narrativa-da-página)
   - [Stack utilizada](#stack-utilizada)
