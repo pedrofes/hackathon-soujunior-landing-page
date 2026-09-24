@@ -1,6 +1,6 @@
 # Landing Page Apoia.se — SouJunior
 
-Landing page oficial da campanha de arrecadação da **SouJunior** no [Apoia.se](https://apoia.se/soujunior), construída durante o Hackathon SouJunior. O objetivo é converter visitantes em apoiadores recorrentes a partir de R$ 2/mês, contando a história da comunidade, mostrando impacto real e facilitando o caminho até a doação.
+Criação da Landing page para o Hackathon SouJunior. Campanha de arrecadação da **SouJunior** no [Apoia.se](https://apoia.se/soujunior), construída durante o Hackathon SouJunior. O objetivo é converter visitantes em apoiadores recorrentes a partir de R$ 2/mês, contando a história da comunidade, mostrando impacto real e facilitando o caminho até a doação.
 
 **Site em produção:** https://hackathon-soujunior-landing-page.vercel.app
 
@@ -181,7 +181,7 @@ Deploy contínuo via **Vercel**, conectado ao repositório: cada Pull Request ge
 <table>
   <tr>
     <td align="center"><a href="https://github.com/larisouzadesigner"><img style="border-radius: 50%;" src="https://github.com/larisouzadesigner.png" width="100px;" alt=""/><br /><sub><b>Lari Souza</b></sub></a><br /><a href="https://github.com/larisouzadesigner" title="UX/UI">🎨</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/micaela-oliveira-experis/"><img style="border-radius: 50%;" src="/images/team/micaela-oliveira.jpg" width="100px;" alt=""/><br /><sub><b>Micaela Oliveira</b></sub></a><br /><a href="https://www.linkedin.com/in/micaela-oliveira-experis/" title="UX/UI">🎨</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/anoemisilva/"><img style="border-radius: 50%;" src="public\images\team\noemi-silva.png" width="100px;" alt=""/><br /><sub><b>Micaela Oliveira</b></sub></a><br /><a href="https://www.linkedin.com/in/anoemisilva/" title="UX/UI">🎨</a></td>
     <td align="center"><a href="https://github.com/paaulo-13"><img style="border-radius: 50%;" src="https://github.com/paaulo-13.png" width="100px;" alt=""/><br /><sub><b>Paulo Moreira</b></sub></a><br /><a href="https://github.com/paaulo-13" title="Dev">💻</a></td>
     <td align="center"><a href="https://github.com/GabrielPassarinVicente"><img style="border-radius: 50%;" src="https://github.com/GabrielPassarinVicente.png" width="100px;" alt=""/><br /><sub><b>Gabriel Passarin</b></sub></a><br /><a href="https://github.com/GabrielPassarinVicente" title="Dev">💻</a></td>
   </tr>
@@ -189,7 +189,7 @@ Deploy contínuo via **Vercel**, conectado ao repositório: cada Pull Request ge
     <td align="center"><a href="https://github.com/pedrofes"><img style="border-radius: 50%;" src="https://github.com/pedrofes.png" width="100px;" alt=""/><br /><sub><b>Pedro Fonseca</b></sub></a><br /><a href="https://github.com/pedrofes" title="Dev">💻</a></td>
     <td align="center"><a href="https://github.com/duev-santos"><img style="border-radius: 50%;" src="https://github.com/duev-santos.png" width="100px;" alt=""/><br /><sub><b>Duanny Evelyn</b></sub></a><br /><a href="https://github.com/duev-santos" title="Dev">💻</a></td>
     <td align="center"><a href="https://github.com/brunucoelho"><img style="border-radius: 50%;" src="https://github.com/brunucoelho.png" width="100px;" alt=""/><br /><sub><b>Bruno Coelho</b></sub></a><br /><a href="https://github.com/brunucoelho" title="QA">🔍</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/stephany-moreira-620aa6307/"><img style="border-radius: 50%;" src="public\images\team\stephany-moreira.jpg" width="100px;" alt=""/><br /><sub><b>Sthefany Teodoro</b></sub></a><br /><a href="https://www.linkedin.com/in/sthefany-gabriela-teodoro/" title="P.O">📝</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/sthefany-gabriela-teodoro/"><img style="border-radius: 50%;" src="public\images\team\stephany-moreira.jpg" width="100px;" alt=""/><br /><sub><b>Sthefany Teodoro</b></sub></a><br /><a href="https://www.linkedin.com/in/sthefany-gabriela-teodoro/" title="P.O">📝</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://www.linkedin.com/in/daiane-gallina-mkt/"><img style="border-radius: 50%;" src="public\images\team\daiane-gallina.jpg" width="100px;" alt=""/><br /><sub><b>Daiane Gallina</b></sub></a><br /><a href="https://www.linkedin.com/in/daiane-gallina-mkt/" title="P.M">📋</a></td>
