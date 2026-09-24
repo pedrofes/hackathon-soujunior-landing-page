@@ -4,6 +4,8 @@ Criação da Landing page para o Hackathon SouJunior. Campanha de arrecadação 
 
 **Site em produção:** https://hackathon-soujunior-landing-page.vercel.app
 
+<img width="894" height="1133" alt="IMG-20260924-WA0020" src="https://github.com/user-attachments/assets/9622dcc3-41fb-4198-af53-451dbf892ada" />
+
 ---
 
 ## Sumário
