@@ -63,7 +63,7 @@ O projeto usa o **App Router** do Next.js com Server Components por padrão — 
 Princípios seguidos:
 
 - **`src/app/`** concentra apenas o que é global e específico do App Router: layout raiz, metadata/SEO, estilos globais e a imagem de Open Graph gerada dinamicamente.
-- **`src/app/page.js`** é só a composição das seções, na ordem do funil de conversão — sem lógica de UI.
+- **`src/app/page.js`** é só a composição das seções, na ordem do funil de conversão, sem lógica de UI.
 - **`src/components/sections/`** — um componente por bloco da página (Header, Hero, Cause, Impact, Testimonials, Plans, Footer), reunindo copy e layout daquela seção.
 - **`src/components/ui/`** — peças reutilizáveis e sem opinião de conteúdo (`CtaButton`, `CarouselArrow`, `CarouselDots`, `PlanCard`, `PlanCarousel`, `CauseCarousel`, `TestimonialCard`), usadas por mais de uma seção ou que encapsulam um padrão de interação (ex.: carrossel).
 - **`src/data/`** — conteúdo (planos, causas, depoimentos) separado da apresentação, para que editar textos/preços não exija tocar em JSX.
