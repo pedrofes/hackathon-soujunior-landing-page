@@ -1,46 +1,56 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import TestimonialCard from "@/components/ui/TestimonialCard";
 import { TESTIMONIALS } from "@/data/testimonials";
+import CarouselDots from "@/components/ui/CarouselDots";
 
-const AUTOPLAY_INTERVAL_MS = 3000;
+// Triplicamos a lista para criar um loop contínuo e infinito sem saltos bruscos
+const EXTENDED_TESTIMONIALS = [
+  ...TESTIMONIALS,
+  ...TESTIMONIALS,
+  ...TESTIMONIALS,
+];
 
 export default function Testimonials() {
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
-  const indexRef = useRef(0);
   const isPausedRef = useRef(false);
+  const pauseTimeoutRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const goTo = (index) => {
-    indexRef.current = index;
-
-    const container = containerRef.current;
-    const card = cardRefs.current[index];
-    if (!container || !card) return;
-
-    // Rola apenas o eixo horizontal do carrossel: scrollIntoView também
-    // rola a página inteira quando o card está fora da viewport vertical.
-    const containerRect = container.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const cardOffsetLeft = cardRect.left - containerRect.left + container.scrollLeft;
-    const targetScrollLeft = cardOffsetLeft - (container.clientWidth - card.clientWidth) / 2;
-
-    container.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
-  };
-
-  // Autoplay: avança para o próximo depoimento a cada 3s.
+  // Rolagem suave, contínua e dinâmica a 60fps usando requestAnimationFrame
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPausedRef.current) return;
-      goTo((indexRef.current + 1) % TESTIMONIALS.length);
-    }, AUTOPLAY_INTERVAL_MS);
+    const container = containerRef.current;
+    if (!container) return;
 
-    return () => clearInterval(interval);
+    let animationFrameId;
+    const speed = 0.8; // Velocidade fluida e confortável para leitura contínua
+
+    const step = () => {
+      if (!isPausedRef.current && container) {
+        container.scrollLeft += speed;
+
+        // Loop infinito: quando atinge a segunda metade do conteúdo duplicado, reposiciona imperceptivelmente
+        const singleSetWidth = container.scrollWidth / 3;
+        if (container.scrollLeft >= singleSetWidth * 2) {
+          container.scrollLeft -= singleSetWidth;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += singleSetWidth;
+        }
+      }
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    };
   }, []);
 
-  // Mantém as bolinhas sincronizadas quando o usuário arrasta o scroll manualmente.
+  // Mantém os dots sincronizados com o depoimento mais próximo do centro
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -49,8 +59,8 @@ export default function Testimonials() {
 
     const updateActiveFromScroll = () => {
       ticking = false;
-      const containerCenter =
-        container.getBoundingClientRect().left + container.clientWidth / 2;
+      const containerRect = container.getBoundingClientRect();
+      const containerCenter = containerRect.left + container.clientWidth / 2;
 
       let closestIndex = 0;
       let closestDistance = Infinity;
@@ -63,11 +73,10 @@ export default function Testimonials() {
 
         if (distance < closestDistance) {
           closestDistance = distance;
-          closestIndex = index;
+          closestIndex = index % TESTIMONIALS.length;
         }
       });
 
-      indexRef.current = closestIndex;
       setActiveIndex(closestIndex);
     };
 
@@ -81,54 +90,110 @@ export default function Testimonials() {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Navegar diretamente para um depoimento ao clicar no dot
+  const goTo = useCallback((targetIndex) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Pausa temporariamente por 4 segundos para focar no card selecionado
+    isPausedRef.current = true;
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      isPausedRef.current = false;
+    }, 4000);
+
+    // Encontra o card correspondente mais próximo no conjunto intermediário
+    const targetElement =
+      cardRefs.current[targetIndex + TESTIMONIALS.length] ||
+      cardRefs.current[targetIndex];
+    if (!targetElement) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = targetElement.getBoundingClientRect();
+    const cardOffsetLeft = cardRect.left - containerRect.left + container.scrollLeft;
+    const targetScrollLeft =
+      cardOffsetLeft - (container.clientWidth - cardRect.clientWidth) / 2;
+
+    container.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+  }, []);
+
+  // Handlers para pausar ao passar o mouse ou interagir via toque
+  const handleMouseEnter = () => {
+    isPausedRef.current = true;
+  };
+
+  const handleMouseLeave = () => {
+    isPausedRef.current = false;
+  };
+
+  const handleTouchStart = () => {
+    isPausedRef.current = true;
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+  };
+
+  const handleTouchEnd = () => {
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => {
+      isPausedRef.current = false;
+    }, 2500);
+  };
+
   return (
     <section
       id="depoimentos"
-      className="flex w-full min-h-screen flex-col overflow-hidden bg-accent px-6 py-16 lg:py-20"
+      className="w-full overflow-hidden bg-accent px-4 sm:px-6 py-16 sm:py-20 lg:py-24"
     >
-      <h2 className="-translate-y-6 text-center font-display text-4xl font-bold text-white lg:-translate-y-8">
+      <h2 className="text-center font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-8 sm:mb-12">
         Depoimentos
       </h2>
 
-      <div className="flex flex-1 flex-col justify-center">
+      <div className="flex flex-col justify-center">
+        {/* Trilho de rolagem contínua fluida */}
         <div
           ref={containerRef}
-          onMouseEnter={() => (isPausedRef.current = true)}
-          onMouseLeave={() => (isPausedRef.current = false)}
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-[max(1.5rem,calc(50%-170px))] pb-2 sm:px-[max(1.5rem,calc(50%-220px))] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          role="region"
+          aria-label="Carrossel de depoimentos"
+          tabIndex={0}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          className="flex gap-6 overflow-x-auto px-6 pb-4 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white/40 rounded-2xl [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden select-none cursor-grab active:cursor-grabbing will-change-scroll"
           style={{
             maskImage:
-              "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
             WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          {TESTIMONIALS.map((testimonial, index) => (
-            <div
-              key={testimonial.id}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-              className="shrink-0 snap-center"
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </div>
-          ))}
+          {EXTENDED_TESTIMONIALS.map((testimonial, index) => {
+            const isClone = index >= TESTIMONIALS.length;
+            return (
+              <div
+                key={`${testimonial.id}-${index}`}
+                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
+                className="shrink-0"
+                aria-hidden={isClone ? "true" : undefined}
+                {...(isClone ? { inert: "" } : {})}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            );
+          })}
         </div>
 
-        <div className="mt-6 flex justify-center gap-2" aria-label="Depoimentos">
-          {TESTIMONIALS.map((testimonial, index) => (
-            <button
-              key={testimonial.id}
-              type="button"
-              onClick={() => goTo(index)}
-              aria-label={`Ir para o depoimento de ${testimonial.name}`}
-              aria-current={index === activeIndex}
-              className={`h-2 rounded-full transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${index === activeIndex ? "w-4 bg-white" : "w-2 bg-white/50"
-                }`}
-            />
-          ))}
-        </div>
+        {/* Indicadores sincronizados */}
+        <CarouselDots
+          count={TESTIMONIALS.length}
+          activeIndex={activeIndex}
+          onDotClick={goTo}
+          getItemTitle={(index) =>
+            TESTIMONIALS[index]?.name || `depoimento ${index + 1}`
+          }
+          className="mt-8"
+        />
       </div>
     </section>
   );

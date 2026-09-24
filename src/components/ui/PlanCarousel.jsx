@@ -1,15 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import PlanCard from "./PlanCard";
+import CarouselArrow from "@/components/ui/CarouselArrow";
+import CarouselDots from "@/components/ui/CarouselDots";
 
 export default function PlanCarousel({ plans }) {
   const [current, setCurrent] = useState(0);
-  const hasMultiple = plans.length > 1;
+  const count = plans.length;
+  const hasMultiple = count > 1;
 
-  const goTo = (index) => setCurrent((index + plans.length) % plans.length);
-  const goPrev = () => goTo(current - 1);
-  const goNext = () => goTo(current + 1);
+  // Refs para controle preciso de Touch-Swipe no mobile
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchDeltaX = useRef(0);
+  const isSwiping = useRef(false);
+
+  const goTo = useCallback(
+    (index) => {
+      setCurrent((index + count) % count);
+    },
+    [count]
+  );
+
+  const goPrev = useCallback(() => {
+    goTo(current - 1);
+  }, [current, goTo]);
+
+  const goNext = useCallback(() => {
+    goTo(current + 1);
+  }, [current, goTo]);
 
   const handleKeyDown = (event) => {
     if (!hasMultiple) return;
@@ -22,88 +42,110 @@ export default function PlanCarousel({ plans }) {
     }
   };
 
-  const arrowClasses =
-    "absolute top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-2xl leading-none text-white/70 transition-colors hover:text-white focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent";
+  // Touch handlers para suporte nativo a swipe no mobile
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchDeltaX.current = 0;
+    isSwiping.current = true;
+  };
 
-  const carouselAria = hasMultiple
-    ? {
-        role: "group",
-        "aria-roledescription": "carrossel",
-        "aria-label": "Planos de apoio",
-      }
-    : {};
+  const handleTouchMove = (e) => {
+    if (!isSwiping.current) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = touchStartX.current - currentX;
+    const diffY = touchStartY.current - currentY;
+
+    // Se o usuário estiver fazendo scroll vertical da página, ignora o swipe
+    if (Math.abs(diffY) > Math.abs(diffX)) {
+      return;
+    }
+
+    touchDeltaX.current = diffX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isSwiping.current) return;
+    isSwiping.current = false;
+    const threshold = 40; // 40px mínimo de deslocamento horizontal
+    if (touchDeltaX.current > threshold) {
+      goNext();
+    } else if (touchDeltaX.current < -threshold) {
+      goPrev();
+    }
+    touchDeltaX.current = 0;
+  };
 
   return (
-    <div className="relative" {...carouselAria} onKeyDown={handleKeyDown}>
-      <div className="grid">
-        {plans.map((plan, index) => {
-          const isCurrent = index === current;
-          const slideAria = hasMultiple
-            ? {
-                role: "group",
-                "aria-roledescription": "slide",
-                "aria-label": `Plano ${index + 1} de ${plans.length}`,
-              }
-            : {};
-
-          return (
-            <div
-              key={plan.id}
-              {...slideAria}
-              aria-hidden={!isCurrent}
-              className={`col-start-1 row-start-1 transition-opacity motion-reduce:transition-none ${
-                isCurrent
-                  ? "opacity-100 duration-200 delay-150"
-                  : "pointer-events-none opacity-0 duration-150"
-              }`}
-            >
-              <PlanCard plan={plan} />
-            </div>
-          );
-        })}
+    <div
+      className="relative w-full min-w-0 max-w-full px-8 sm:px-10 outline-none focus:outline-none ring-0 focus:ring-0"
+      role="region"
+      aria-roledescription="carrossel"
+      aria-label="Planos de apoio"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
+      {/* Viewport do carrossel */}
+      <div
+        className="w-full min-w-0 overflow-hidden py-5 -my-2"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div
+          className="flex w-full will-change-transform transition-transform duration-500 ease-out select-none"
+          style={{
+            transform: `translateX(-${current * 100}%)`,
+          }}
+        >
+          {plans.map((plan, index) => {
+            const isCurrent = index === current;
+            return (
+              <div
+                key={plan.id}
+                className="w-full min-w-full shrink-0 px-2"
+                aria-hidden={!isCurrent}
+              >
+                <PlanCard plan={plan} />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {hasMultiple && (
         <span className="sr-only" aria-live="polite">
-          {`Plano ${current + 1} de ${plans.length}: ${plans[current].title}`}
+          {`Plano ${current + 1} de ${count}: ${plans[current].title}`}
         </span>
       )}
 
       {hasMultiple && (
         <>
-          <button
-            type="button"
+          {/* Seta Anterior */}
+          <CarouselArrow
+            direction="prev"
             onClick={goPrev}
-            aria-label="Plano anterior"
-            className={`${arrowClasses} -left-3 xl:-left-10`}
-          >
-            <span aria-hidden="true">&lsaquo;</span>
-          </button>
+            ariaLabel="Plano anterior"
+            className="absolute left-0 top-1/2 -translate-y-1/2"
+          />
 
-          <button
-            type="button"
+          {/* Seta Próxima */}
+          <CarouselArrow
+            direction="next"
             onClick={goNext}
-            aria-label="Próximo plano"
-            className={`${arrowClasses} -right-3 xl:-right-10`}
-          >
-            <span aria-hidden="true">&rsaquo;</span>
-          </button>
+            ariaLabel="Próximo plano"
+            className="absolute right-0 top-1/2 -translate-y-1/2"
+          />
 
-          <ul className="mt-6 flex justify-center gap-2">
-            {plans.map((plan, index) => (
-              <li key={plan.id}>
-                <button
-                  type="button"
-                  onClick={() => goTo(index)}
-                  aria-label={`Ir para o plano ${index + 1}`}
-                  aria-current={index === current}
-                  className={`h-2 rounded-full transition-all motion-reduce:transition-none focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                    index === current ? "w-4 bg-white" : "w-2 bg-white/50"
-                  }`}
-                />
-              </li>
-            ))}
-          </ul>
+          {/* Dots de navegação em esfera de vidro */}
+          <CarouselDots
+            count={count}
+            activeIndex={current}
+            onDotClick={goTo}
+            getItemTitle={(index) => plans[index]?.price || `plano ${index + 1}`}
+            className="mt-6"
+          />
         </>
       )}
     </div>

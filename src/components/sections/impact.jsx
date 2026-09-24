@@ -56,10 +56,10 @@ export default function Impact() {
   return (
     <section
       id="impacto"
-      className="w-full px-6 pb-12 pt-20 lg:pb-20 lg:pt-28"
+      className="w-full px-4 sm:px-6 py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-3xl lg:text-4xl font-bold text-white">
+        <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
           O seu apoio nos ajuda
           <br />a <span className="text-yellow-accent">impactar</span> cada vez mais
         </h2>
@@ -228,7 +228,7 @@ export default function Impact() {
           </div>
         </div>
 
-        <div className="mt-8 text-right font-sans text-sm text-white/90">
+        <div className="mt-8 text-center sm:text-right font-sans text-xs sm:text-sm text-white/90">
           <p>Veja para onde vai o seu apoio →</p>
           <a
             href="https://hackathon.soujunior.tech/gastos_2026.csv"
